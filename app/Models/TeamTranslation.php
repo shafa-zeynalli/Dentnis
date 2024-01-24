@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class TeamTranslation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'teams_id',
+        'language_id',
+        'position'
+    ];
+
 
     public function language()
     {
-        return $this->hasMany(Language::class, 'id', 'language_id');
+        return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 }

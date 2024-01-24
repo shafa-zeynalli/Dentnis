@@ -14,16 +14,24 @@
                 </div>
             </div>
             <div class="titles-part">
-                <p><a href="" class="footer-li">Gülüş Tasarımı</a></p>
-                <p><a href="" class="footer-li">Gülüş Tasarımı</a></p>
-                <p><a href="" class="footer-li">Gülüş Tasarımı</a></p>
-                <p><a href="" class="footer-li">Gülüş Tasarımı</a></p>
-                <p><a href="" class="footer-li">Gülüş Tasarımı</a></p>
+                <div class="column">
+                    @foreach ($blogsGeneral->chunk(5) as $chunk)
+                        <div class="col-3">
+                            @foreach ($chunk as $blog)
+                                @foreach ($blog->translations as $item)
+                                    <p><a href="{{ url("$lang/$blog->slug") }}" class="footer-li">{{ $item->title }}</a></p>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
         <div class="lower">
             <p>© 2024 Tüm hakları www.dentnis.com’a aittir.</p>
-            <p>Dentnis.com'da yer alan tüm içerikler sadece kullanıcıyı bilgilendirmek amacı ile sunulmuş olup tıbbi tedavi anlamında tavsiye niteliği taşımamaktadır.</p>
+            <p>Dentnis.com'da yer alan tüm içerikler sadece kullanıcıyı bilgilendirmek amacı ile sunulmuş olup tıbbi
+                tedavi anlamında tavsiye niteliği taşımamaktadır.</p>
         </div>
     </div>
 </footer>

@@ -13,4 +13,11 @@ class CategoryTranslation extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id', 'id');
+    }
 }
+
+

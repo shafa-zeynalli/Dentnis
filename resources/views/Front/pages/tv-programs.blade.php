@@ -1,4 +1,4 @@
-@extends('Front.Layouts.front')
+@extends('Layouts.front')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -22,9 +22,13 @@
             <div class="all-article">
                 @for($i = 0; $i < 12; $i++)
                     <div class="card" style="width: 18rem;">
-                        <iframe width="400" height="228" src="https://www.youtube.com/embed/RnZDMCzMwxI" title="Ollie - perfect timing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="400" height="228" src="https://www.youtube.com/embed/RnZDMCzMwxI"
+                                title="Ollie - perfect timing" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
                         <div class="video-title">
-                            <b> Bir Günde Diş implantı Tedavisi Estetik Diş Hekimi Dr.Abdulkadir Narin Çook Yaşa 6 Şubat 2021 TV8 </b>
+                            <b> Bir Günde Diş implantı Tedavisi Estetik Diş Hekimi Dr.Abdulkadir Narin Çook Yaşa 6 Şubat
+                                2021 TV8 </b>
                         </div>
                     </div>
                 @endfor

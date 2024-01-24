@@ -7,13 +7,14 @@
         </div>
         <div>
             <ul class="navbar">
+{{--                @dd($categories);--}}
                 @foreach ($categories as $category)
                     <li>
                         <a href=''><span> {{$category->translations->first()->name}} </span> </a>
                         <ul>
                             @foreach ($category->blogs as $blog)
                                 <li>
-                                    <a href="{{ $blog->slug}}">{{ $blog->translations->first()->title}}</a>
+                                    <a href="{{ url("$lang/$blog->slug") }}">{{ $blog->translations->first()->title}}</a>
                                 </li>
                             @endforeach
                         </ul>

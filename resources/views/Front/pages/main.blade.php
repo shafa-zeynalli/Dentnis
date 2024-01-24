@@ -1,4 +1,4 @@
-@extends('Front.Layouts.front')
+@extends('Layouts.front')
 
 @section('content')
     <div class="slider">
@@ -7,7 +7,7 @@
                 {{--                @dd($item)--}}
                 @foreach($item->blogs as $blog)
                     {{--                    @dd($blog)--}}
-                    <a href="{{$blog->slug}}"><img src="{{$item->image}}" alt="Image 1"
+                    <a href="{{ url("$lang/$blog->slug") }}"><img src="{{$item->image}}" alt="Image 1"
                                                    class="active"></a>
                 @endforeach
             @endforeach
@@ -60,7 +60,8 @@
     <!-- YouTube start-->
     <div class="youtube">
         @foreach($youtube as $item)
-            {{$item->url}}
+            <iframe src="{{$item->url}}" title="Dentnis İmplantoloji ve Estetik Diş Kliniği" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
         @endforeach
     </div>
     <!-- YouTube end-->
@@ -97,59 +98,19 @@
         <h2>Estetik Diş Hekimliği</h2>
         <div class="container1">
             @foreach($blogs as $blog)
-                <a href="{{$blog->slug}}">
+                <a href="{{ url("$lang/$blog->slug") }}">
                     <div class="image-container">
                         <img src="{{$blog->image}}" alt="Image"
                              style="width: 100%; height: 100%;">
                         <div class="image-overlay"></div>
                         @foreach($blog->translations as $item)
-{{--                            @dd($blog)--}}
+                            {{--                            @dd($blog)--}}
                             <div class="image-title">{{$item->title}}</div>
                         @endforeach
                         <div class="underline"></div>
                     </div>
                 </a>
             @endforeach
-            {{--            <div class="image-container">--}}
-            {{--                <img--}}
-            {{--                    src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/05/bir-gunde-implant.png.webp"--}}
-            {{--                    alt="Image" style="width: 100%; height: 100%;">--}}
-            {{--                <div class="image-overlay"></div>--}}
-            {{--                <div class="image-title">Gülüş tasarımı</div>--}}
-            {{--                <div class="underline"></div>--}}
-            {{--            </div>--}}
-            {{--            <div class="image-container">--}}
-            {{--                <img--}}
-            {{--                    src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/05/pembe-estetik.png.webp"--}}
-            {{--                    alt="Image" style="width: 100%; height: 100%;">--}}
-            {{--                <div class="image-overlay"></div>--}}
-            {{--                <div class="image-title">Gülüş tasarımı</div>--}}
-            {{--                <div class="underline"></div>--}}
-            {{--            </div>--}}
-            {{--            <div class="image-container">--}}
-            {{--                <img--}}
-            {{--                    src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/05/implant-fiyatlari-image.png.webp"--}}
-            {{--                    alt="Image" style="width: 100%; height: 100%;">--}}
-            {{--                <div class="image-overlay"></div>--}}
-            {{--                <div class="image-title">Gülüş tasarımı</div>--}}
-            {{--                <div class="underline"></div>--}}
-            {{--            </div>--}}
-            {{--            <div class="image-container">--}}
-            {{--                <img--}}
-            {{--                    src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/05/gulus-tasarimi-fiyatlari-image.png.webp"--}}
-            {{--                    alt="Image" style="width: 100%; height: 100%;">--}}
-            {{--                <div class="image-overlay"></div>--}}
-            {{--                <div class="image-title">Gülüş tasarımı</div>--}}
-            {{--                <div class="underline"></div>--}}
-            {{--            </div>--}}
-            {{--            <div class="image-container">--}}
-            {{--                <img--}}
-            {{--                    src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/05/dis-dolgusu-fiyatlari-image.png.webp"--}}
-            {{--                    alt="Image" style="width: 100%; height: 100%;">--}}
-            {{--                <div class="image-overlay"></div>--}}
-            {{--                <div class="image-title">Gülüş tasarımı</div>--}}
-            {{--                <div class="underline"></div>--}}
-            {{--            </div>--}}
         </div>
     </div>
     <!--Estetik dis hekimligi end-->
@@ -157,48 +118,24 @@
     <div class="articles">
         <h2>Makaleler</h2>
         <div class="container1">
-            <div class="col">
-                <div class="image">
-                    <img
-                        src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2024/01/Adsiz-tasarim-1.jpg.webp"
-                        alt="">
+            @for ($i = 0; $i < 3; $i++)
+                @php
+                    $blog = $blogs[$i];
+                @endphp
+
+                <div class="col">
+                    <div class="image">
+                        <img src="{{ $blog->image }}" alt="">
+                    </div>
+                    <div class="content">
+                        @foreach ($blog->translations as $item)
+                            <h2>{{ $item->title }}</h2>
+                            <p>{{ substr($item->description, 0, 200) }}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
+                        @endforeach
+                        <a href="{{ url("$lang/$blog->slug") }}">Devamını oku</a>
+                    </div>
                 </div>
-                <div class="content">
-                    <h2>Nişantaşı Gülüş Tasarımı (Gülüş Estetiği)</h2>
-                    <p>Nişantaşı gülüş tasarımı diş estetiği ve kozmetik diş hekimliği adı altında yapılan bir tedaviler
-                        bütünüdür. Bu tedavi ile hasta gülüşündeki eksiklikleri, istemediği durumları, görünümünü ve
-                        dişin […]</p>
-                    <button>Devamını oku</button>
-                </div>
-            </div>
-            <div class="col">
-                <div class="image">
-                    <img
-                        src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/12/implant-omru-ne-kadar.jpg.webp"
-                        alt=""/>
-                </div>
-                <div class="content">
-                    <h2>Nişantaşı Gülüş Tasarımı (Gülüş Estetiği)</h2>
-                    <p>Nişantaşı gülüş tasarımı diş estetiği ve kozmetik diş hekimliği adı altında yapılan bir tedaviler
-                        bütünüdür. Bu tedavi ile hasta gülüşündeki eksiklikleri, istemediği durumları, görünümünü ve
-                        dişin […]</p>
-                    <button>Devamını oku</button>
-                </div>
-            </div>
-            <div class="col">
-                <div class="image">
-                    <img
-                        src="https://dentnis.com/wp-content/webp-express/webp-images/uploads/2023/11/kaplama-disim-dustu.jpg.webp"
-                        alt="">
-                </div>
-                <div class="content">
-                    <h2>Nişantaşı Gülüş Tasarımı (Gülüş Estetiği)</h2>
-                    <p>Nişantaşı gülüş tasarımı diş estetiği ve kozmetik diş hekimliği adı altında yapılan bir tedaviler
-                        bütünüdür. Bu tedavi ile hasta gülüşündeki eksiklikleri, istemediği durumları, görünümünü ve
-                        dişin […]</p>
-                    <button>Devamını oku</button>
-                </div>
-            </div>
+            @endfor
         </div>
     </div>
     <!--Article section end-->
