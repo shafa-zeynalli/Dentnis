@@ -16,6 +16,6 @@ class BlogTranslation extends Model
     ];
     public function language()
     {
-        return $this->hasMany(Language::class, 'id', 'language_id');
+        return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 }

@@ -51,7 +51,7 @@ class TeamController extends Controller
                 'position' => $request->input("$lang.title"),
             ]);
         }
-
+//        $request->request->replace([]);
         return redirect()->route('admin.teams.index', ['lang' => 'en'])->with('success', 'Team member created successfully');
     }
 

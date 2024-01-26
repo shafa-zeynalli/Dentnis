@@ -8,6 +8,7 @@
 {{--    </div>--}}
     <ul class="app-menu">
         <li><a class="app-menu__item active" href="{{route('admin.slider.index')}}"><span class="app-menu__label">Slider Images</span></a></li>
+        <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a></li>
 {{--        <li><a class="app-menu__item active" href="{{route('admin.category.index')}}"><span class="app-menu__label">Categories</span></a></li>--}}
         <li><a class="app-menu__item active" href="{{route('admin.blogs.index',$lang)}}"><span class="app-menu__label">Blogs</span></a></li>
 {{--        <li><a class="app-menu__item active" href="{{route('admin.quotes')}}"><span class="app-menu__label">Quotes</span></a></li>--}}
@@ -21,7 +22,7 @@
 {{--                <li><a class="treeview-item" href="widgets.html"><i class="icon bi bi-circle-fill"></i> Widgets</a></li>--}}
 {{--            </ul>--}}
 {{--        </li>--}}
-        <li class="treeview"><a class="app-menu__item" href="{{route('admin.teams.index',$lang)}}" ><span class="app-menu__label">Teams</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.teams.index',$lang)}}" ><span class="app-menu__label">Teams</span></a>
 {{--        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon bi bi-ui-checks"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator bi bi-chevron-right"></i></a>--}}
 {{--            <ul class="treeview-menu">--}}
 {{--                <li><a class="treeview-item" href="form-components.html"><i class="icon bi bi-circle-fill"></i> Form Components</a></li>--}}

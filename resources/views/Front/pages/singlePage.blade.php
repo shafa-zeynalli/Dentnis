@@ -21,7 +21,7 @@
 
             <div class="container">
                 @foreach($blog->translations as $item)
-                    <p>{{$item->description}}</p>
+                    <p>{!! $item->description !!}</p>
                 @endforeach
             </div>
         @endforeach

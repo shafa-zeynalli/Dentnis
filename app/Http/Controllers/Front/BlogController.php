@@ -33,8 +33,9 @@ class BlogController extends Controller
 
     public function index()
     {
+//        session()->flush();
         $lang = session()->get('language', 'tr');
-        $sliders = Slider::with('blogs')->get();
+        $sliders = Slider::get();
 
         $quotes = Quote::with(['translations' => function ($query) use ($lang) {
             $query->whereHas('language', function ($subquery) use ($lang) {

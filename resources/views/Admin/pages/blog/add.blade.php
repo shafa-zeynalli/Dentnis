@@ -28,7 +28,7 @@
                                     $categoryTranslation[] = $category->translations
                                         ->where('language.lang', 'tr')->first();
                                     }
-                                    dd($categories);
+//                                    dd($categoryTranslation);
 //                                       echo '<pre>';
 //                                       print_r($categoryTranslation);
                             @endphp

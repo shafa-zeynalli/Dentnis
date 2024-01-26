@@ -3,13 +3,20 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Front\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
     Route::get('/dentnis/dashboard',[AdminController::class,'index'])->name('admin.main');
+
     Route::resource('sliders', SliderController::class)->names('admin.slider');
+    Route::put('admin/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
+
+    Route::resource('sliders', SponsorController::class)->names('admin.sponsor');
+    Route::put('admin/sliders/{slider}', [SponsorController::class,'update'])->name('admin.sponsor.edits');
+
 
     Route::get('/teams/{lang}', [TeamController::class, 'index'])->name('admin.teams.index');
     Route::get('/teams-create', [TeamController::class, 'create'])->name('admin.teams.create');
@@ -26,8 +33,6 @@ Route::prefix('admin')->group(function () {
     Route::delete('/blogs-delete/{blog}', [Blog::class, 'destroy'])->name('admin.blogs.destroy');
 
 });
-
-
 
 
 

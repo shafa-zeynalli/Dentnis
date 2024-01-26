@@ -4,12 +4,7 @@
     <div class="slider">
         <div id="image-container">
             @foreach($sliders as $item )
-                {{--                @dd($item)--}}
-                @foreach($item->blogs as $blog)
-                    {{--                    @dd($blog)--}}
-                    <a href="{{ url("$lang/$blog->slug") }}"><img src="{{$item->image}}" alt="Image 1"
-                                                   class="active"></a>
-                @endforeach
+                <img src="{{$item->image}}" alt="Image 1" class="active">
             @endforeach
         </div>
         <div class="buttons">
@@ -60,7 +55,9 @@
     <!-- YouTube start-->
     <div class="youtube">
         @foreach($youtube as $item)
-            <iframe src="{{$item->url}}" title="Dentnis İmplantoloji ve Estetik Diş Kliniği" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="{{$item->url}}" title="Dentnis İmplantoloji ve Estetik Diş Kliniği" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
 
         @endforeach
     </div>
@@ -120,20 +117,23 @@
         <div class="container1">
             @for ($i = 0; $i < 3; $i++)
                 @php
-                    $blog = $blogs[$i];
+                    $blog = $blogs[$i] ?? null;
                 @endphp
 
                 <div class="col">
-                    <div class="image">
-                        <img src="{{ $blog->image }}" alt="">
-                    </div>
-                    <div class="content">
-                        @foreach ($blog->translations as $item)
-                            <h2>{{ $item->title }}</h2>
-                            <p>{{ substr($item->description, 0, 200) }}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
-                        @endforeach
-                        <a href="{{ url("$lang/$blog->slug") }}">Devamını oku</a>
-                    </div>
+                    @if(isset($blog))
+                        <div class="image">
+                            <img src="{{ $blog->image }}" alt="">
+                        </div>
+
+                        <div class="content">
+                            @foreach ($blog->translations as $item)
+                                <h2>{{ $item->title }}</h2>
+                                <p>{{ substr($item->description, 0, 200) }}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
+                            @endforeach
+                            <a href="{{ url("$lang/$blog->slug") }}">Devamını oku</a>
+                        </div>
+                    @endif
                 </div>
             @endfor
         </div>

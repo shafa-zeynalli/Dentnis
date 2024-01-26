@@ -1,8 +1,8 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Team Members</h2>
-    <a href="{{ route('admin.blogs.create') }}" class="btn btn-success mb-3">Add Team Member</a>
+    <h2>Blogs</h2>
+    <a href="{{ route('admin.blogs.create') }}" class="btn btn-success mb-3">Add Blog Item</a>
 
     @if(session('success'))
         <div class="alert alert-success mt-3">
@@ -31,7 +31,7 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>#ID</th>
             <th>Image</th>
             <th>Slug</th>
             <th>Title</th>
@@ -43,11 +43,11 @@
         @foreach($blogs as $blog)
             <tr>
                 <td>{{ $blog->id }}</td>
-                <td><img src="{{ $blog->image }}" alt="Team Member Image" width="100"></td>
+                <td><img src="{{ $blog->image }}" alt="Blog Item Image" width="100"></td>
                 <td>{{ $blog->slug }}</td>
                 @foreach($blog->translations as $item )
                     <td>{{ $item->title }}</td>
-                    <td>{{ substr($item->description, 0, 20) }}{{ strlen($item->description) > 20 ? '[...]' : '' }}</td>
+                    <td>{!!  substr($item->description, 0, 20) !!}{{  strlen($item->description) > 20 ? '[...]' : '' }}</td>
 
 {{--                    <td>{{ $item->description ?? 'null' }}</td>--}}
                 @endforeach

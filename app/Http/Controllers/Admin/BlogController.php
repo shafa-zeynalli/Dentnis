@@ -10,6 +10,7 @@ use App\Models\Language;
 use App\Models\Team;
 use App\Models\TeamTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -96,24 +97,80 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog  $blog)
     {
-        //
+        return view('Admin.pages.blog.edit', compact('blog'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $languages = config('app.languages');
+        $validationRules = [
+            "category" => 'required'
+        ];
+
+        foreach ($languages as $lang) {
+            $validationRules["$lang.title"] = 'required|string|max:255';
+            $validationRules["$lang.description"] = 'required|string';
+        }
+        $request->validate($validationRules);
+//        dd('request',$request->all());
+
+        $blog = Blog::find($request->input('blog_id'));
+
+        // Eğer yeni kayıt ise dosyayı kaydet
+        if ($request->hasFile('image')) {
+            if (Storage::disk('public')->exists($blog->image)) {
+                Storage::disk('public')->delete($blog->image);
+
+            }
+            $blog->image = $request->file('image')->store('blog_images', 'public');
+        }
+
+        $slug= Str::slug($request->input('tr.title'));
+
+        $blog->slug = $slug;
+        $blog->category_id = $request->input('category');
+        $blog->save();
+
+        foreach ($languages as $lang) {
+            $language = Language::where('lang', $lang)->first();
+            $langId = $language->id;
+
+            BlogTranslation::updateOrCreate([
+                'blog_id' => $blog->id,
+                'language_id' => $langId,
+            ], [
+                'title' => $request->input("$lang.title"),
+                'description' => $request->input("$lang.description"),
+            ]);
+        }
+
+        return redirect()->route('admin.blogs.index', ['lang' => 'en'])->with('success', 'Team member created or updated successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        //
+        if ($blog) {
+            $blog->translations()->delete();
+
+            if (Storage::disk('public')->exists($blog->image)) {
+                Storage::disk('public')->delete($blog->image);
+
+            }
+            $blog->delete();
+
+            return redirect()->back()->with('success', 'Blog deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Blog not found.');
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
@@ -16,17 +17,17 @@ class SliderController extends Controller
 
     public function create()
     {
-        return view('Admin.pages.slider.create');
+        return view('Admin.pages.slider.add');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|url',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         Slider::create([
-            'image' => $request->input('image'),
+            'image' => $request->file('image')->store('slider_images', 'public'),
         ]);
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider image added successfully!');
@@ -39,19 +40,31 @@ class SliderController extends Controller
 
     public function update(Request $request, Slider $slider)
     {
+//        dd($request->all());
         $request->validate([
-            'image' => 'required|url',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        if ($request->hasFile('image')) {
+            if (Storage::disk('public')->exists($slider->image)) {
+                Storage::disk('public')->delete($slider->image);
 
-        $slider->update([
-            'image' => $request->input('image'),
-        ]);
+            }
+            $slider->update([
+                'image' => $request->file('image')->store('slider_images', 'public'),
+            ]);
+        }
+
+
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider image updated successfully!');
     }
 
     public function destroy(Slider $slider)
     {
+        if (Storage::disk('public')->exists($slider->image)) {
+            Storage::disk('public')->delete($slider->image);
+
+        }
         $slider->delete();
         return redirect()->route('admin.slider.index')->with('success', 'Slider image deleted successfully!');
     }
