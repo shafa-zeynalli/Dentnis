@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\TeamController;
@@ -11,11 +12,18 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function () {
     Route::get('/dentnis/dashboard',[AdminController::class,'index'])->name('admin.main');
 
-    Route::resource('sliders', SliderController::class)->names('admin.slider');
-    Route::put('admin/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
+    Route::resource('/sliders', SliderController::class)->names('admin.slider');
+    Route::put('/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
 
-    Route::resource('sliders', SponsorController::class)->names('admin.sponsor');
-    Route::put('admin/sliders/{slider}', [SponsorController::class,'update'])->name('admin.sponsor.edits');
+    Route::resource('/sponsors', SponsorController::class)->names('admin.sponsor');
+    Route::put('/sponsors/{sponsor}', [SponsorController::class,'update'])->name('admin.sponsor.edits');
+
+    Route::get('/categories/{lang}', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/category-create', [CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/category-create', [CategoryController::class, 'store']);
+    Route::get('/category-edit/{category}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::put('/category-edit/update', [CategoryController::class, 'update'])->name('admin.category.update');
+    Route::delete('/category-delete/{category}', [TeamController::class, 'delete'])->name('admin.category.destroy');
 
 
     Route::get('/teams/{lang}', [TeamController::class, 'index'])->name('admin.teams.index');

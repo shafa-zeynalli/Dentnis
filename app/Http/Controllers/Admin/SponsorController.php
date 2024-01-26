@@ -8,12 +8,12 @@ use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class SliderController extends Controller
+class SponsorController extends Controller
 {
     public function index()
     {
-        $sponsor = Sponsor::all();
-        return view('Admin.pages.sponsor.index', compact('sponsor'));
+        $sponsors = Sponsor::all();
+        return view('Admin.pages.sponsor.index', compact('sponsors'));
     }
 
     public function create()

@@ -4,9 +4,9 @@
 @section('content')
 
 
-        <h2>Slider Images</h2>
+        <h2>Sponsor Images</h2>
 
-        <a href="{{ route('admin.slider.create') }}" class="btn btn-success">Add Image</a>
+        <a href="{{ route('admin.sponsor.create') }}" class="btn btn-success">Add Image</a>
 
         @if(session('success'))
             <div class="alert alert-success mt-3">
@@ -17,19 +17,19 @@
         <table class="table mt-3">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>#ID</th>
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($sliders as $slider)
+            @foreach($sponsors as $sponsor)
                 <tr>
-                    <td>{{ $slider->id }}</td>
-                    <td><img src="{{ $slider->image }}" alt="Slider Image" width="100"></td>
+                    <td>{{ $sponsor->id }}</td>
+                    <td><img src="{{ $sponsor->image }}" alt="Sponsor Image" width="100"></td>
                     <td>
-                        <a href="{{ route('admin.slider.edit', ['slider' => $slider->id]) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('admin.slider.destroy', ['slider' => $slider->id]) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.sponsor.edit', ['sponsor' => $sponsor->id]) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('admin.sponsor.destroy', ['sponsor' => $sponsor->id]) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

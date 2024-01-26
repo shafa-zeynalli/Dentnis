@@ -11,6 +11,7 @@
         <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a></li>
 {{--        <li><a class="app-menu__item active" href="{{route('admin.category.index')}}"><span class="app-menu__label">Categories</span></a></li>--}}
         <li><a class="app-menu__item active" href="{{route('admin.blogs.index',$lang)}}"><span class="app-menu__label">Blogs</span></a></li>
+            <li><a class="app-menu__item active" href="{{route('admin.category.index',$lang)}}"><span class="app-menu__label">Categories</span></a></li>
 {{--        <li><a class="app-menu__item active" href="{{route('admin.quotes')}}"><span class="app-menu__label">Quotes</span></a></li>--}}
 
 {{--        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon bi bi-speedometer"></i><span class="app-menu__label">Dashboard</span></a></li>--}}
