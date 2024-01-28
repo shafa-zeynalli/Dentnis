@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SponsorController;
@@ -18,6 +19,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/sponsors', SponsorController::class)->names('admin.sponsor');
     Route::put('/sponsors/{sponsor}', [SponsorController::class,'update'])->name('admin.sponsor.edits');
+
+    Route::resource('/languages', LanguageController::class)->names('admin.language');
+    Route::put('/languages/{language}', [LanguageController::class,'update'])->name('admin.language.edits');
 
     Route::get('/categories/{lang}', [CategoryController::class, 'index'])->name('admin.category.index');
     Route::get('/category-create', [CategoryController::class, 'create'])->name('admin.category.create');

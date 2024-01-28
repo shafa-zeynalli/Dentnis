@@ -4,6 +4,7 @@
         <li><a class="app-menu__item active" href="{{route('admin.slider.index')}}"><span class="app-menu__label">Slider Images</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.language.index')}}"><span class="app-menu__label">Languages</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.blogs.index',$lang)}}"><span class="app-menu__label">Blogs</span></a>
         </li>
