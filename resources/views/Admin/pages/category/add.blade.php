@@ -1,10 +1,10 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Add Team Member</h2>
+    <h2>Add Category Item</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.teams.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.category.create')}}" method="POST" enctype="multipart/form-data">
                 {{--                {{ isset($model) ? route($routeName.'.update', $model->id) : route($routeName.'.store') }}--}}
                 @csrf
                 <div class="card card-primary card-tabs">
@@ -13,7 +13,8 @@
                             @foreach(config('app.languages') as $lang)
                                 <li class="nav-item">
                                     <a class="nav-link {{$loop->first ? 'active show' : ''}} @error("$lang.title") text-danger @enderror"
-                                       id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#tab-{{$lang}}" role="tab"
+                                       id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#tab-{{$lang}}"
+                                       role="tab"
                                        aria-controls="custom-tabs-one-home" aria-selected="true">{{$lang}}</a>
                                 </li>
                             @endforeach
@@ -22,12 +23,13 @@
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
                             @foreach(config('app.languages') as $index => $lang)
-                                <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$lang}}" role="tabpanel"
+                                <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$lang}}"
+                                     role="tabpanel"
                                      aria-labelledby="custom-tabs-one-home-tab">
                                     <div class="form-group">
-                                        <label for="{{$lang}}-title">Vezife</label>
-                                        <input type="text" placeholder="Başlıq" name="{{$lang}}[title]"
-                                               value="{{old($lang.'text')}}"
+                                        <label for="{{$lang}}-title">Title</label>
+                                        <input type="text" placeholder="Title Name" name="{{$lang}}[title]"
+                                               value="{{old($lang.'.title')}}"
                                                class="form-control" id="{{$lang}}-title">
                                         @error("$lang.title")
                                         <span class="text-danger">{{$message}}</span>
@@ -38,27 +40,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group py-2">
-                    <label>Ad, Soyad</label>
-                    <input name="firstName" class="form-control" type="text" value="{{old('firstName')}}"/>
-                    @error('blogs_type_id')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group py-3">
-                    <label>Image</label>
-
-                    <input type="file" name="image" class="form-control">
-                    @error('image')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-
-                <button class="btn btn-success">Save</button>
+                <button class="btn btn-success my-4">Save</button>
             </form>
         </div>
     </div>

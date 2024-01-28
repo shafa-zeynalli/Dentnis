@@ -1,8 +1,8 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Blogs</h2>
-    <a href="{{ route('admin.category.create') }}" class="btn btn-success mb-3">Add Blog Item</a>
+    <h2>Categories</h2>
+    <a href="{{ route('admin.category.create') }}" class="btn btn-success my-3">Add Category Item</a>
 
     @if(session('success'))
         <div class="alert alert-success mt-3">
@@ -37,11 +37,11 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($categories as $category)
+        @foreach($adminCategories as $category)
             <tr>
                 <td>{{ $category->id }}</td>
                 @foreach($category->translations as $item )
-                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->name ?? null}}</td>
                 @endforeach
                 <td>
                     <a href="{{ route('admin.category.edit', ['category' => $category->id]) }}" class="btn btn-primary">Edit</a>

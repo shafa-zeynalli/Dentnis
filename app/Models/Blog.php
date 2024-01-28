@@ -20,9 +20,6 @@ class Blog extends Model
         return $this->hasMany(BlogTranslation::class);
     }
 
-    public function slider()
-    {
-        return $this->belongsTo(Slider::class, 'slider_id');
-    }
+
 
 }

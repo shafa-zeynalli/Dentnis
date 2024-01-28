@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="section1">
-        <h1>Estetik Diş Hekimliği</h1>
+        <h1>{{__("Estetik Diş Hekimliği")}}</h1>
         <div class="row">
             @foreach($quotes as $quote)
 
@@ -64,7 +64,7 @@
     <!-- YouTube end-->
     <!-- Ekibimiz start -->
     <div class="ekibimiz-container">
-        <h1>Ekibimiz</h1>
+        <h1>{{__("Ekibimiz")}}</h1>
         <div class="swiper-2 mySwiper my2">
             <div class="swiper-wrapper">
                 @foreach($teams as $team)
@@ -92,10 +92,10 @@
     <!--Ekibimiz end-->
     <!--Estetik dis hekimligi start-->
     <div class="section2">
-        <h2>Estetik Diş Hekimliği</h2>
+        <h2>{{__("Estetik Diş Hekimliği")}}</h2>
         <div class="container1">
             @foreach($blogs as $blog)
-                <a href="{{ url("$lang/$blog->slug") }}">
+                <a href="{{ url("$blog->slug") }}">
                     <div class="image-container">
                         <img src="{{$blog->image}}" alt="Image"
                              style="width: 100%; height: 100%;">
@@ -113,7 +113,7 @@
     <!--Estetik dis hekimligi end-->
     <!--Article section start-->
     <div class="articles">
-        <h2>Makaleler</h2>
+        <h2>{{__("Makaleler")}}</h2>
         <div class="container1">
             @for ($i = 0; $i < 3; $i++)
                 @php
@@ -129,9 +129,9 @@
                         <div class="content">
                             @foreach ($blog->translations as $item)
                                 <h2>{{ $item->title }}</h2>
-                                <p>{{ substr($item->description, 0, 200) }}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
+                                <p>{!!  substr($item->description, 0, 200) !!}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
                             @endforeach
-                            <a href="{{ url("$lang/$blog->slug") }}">Devamını oku</a>
+                            <a href="{{ url("$blog->slug") }}">{{__("Devamını oku")}}</a>
                         </div>
                     @endif
                 </div>

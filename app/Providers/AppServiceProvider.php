@@ -24,10 +24,12 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer(['Front.*', 'Admin.*'], function($view){
             $lang = session()->get('language', 'tr');
+            App::setLocale($lang);
+
 //            $lang = 'tr';
 //            $categories = Category::with(['translations', 'blogs.translations'])->get();
 
-            $categories = Category::with([
+            $categoriesAll = Category::with([
                 'translations' => function ($query) use ($lang) {
                     $query->whereHas('language', function ($subquery) use ($lang) {
                         $subquery->where('lang', $lang);
@@ -46,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
                 });
             }])->get();
 //            dd($lang);
-            $view->with(compact('categories', 'lang', 'blogsGeneral'));
+            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral'));
         });
     }
 }

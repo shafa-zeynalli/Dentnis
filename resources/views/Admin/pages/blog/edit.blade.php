@@ -1,7 +1,7 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Edit Blog Member</h2>
+    <h2>Edit Blog Item</h2>
     <div class="card">
         <div class="card-body">
             <form action="{{route('admin.blogs.update')}}" method="POST" enctype="multipart/form-data">
@@ -23,11 +23,12 @@
                         <div class="tab-content" id="custom-tabs-one-tabContent">
                             @php
                                 $categoryTranslation =[];
-                                   foreach ($categories as $category){
+                                   foreach ($categoriesAll as $category){
                                     $categoryTranslation[] = $category->translations
                                         ->where('language.lang', 'tr')->first();
                                     }
 //                                    dd($categoryTranslation);
+//                                    $categoryTranslation->category_id  bu ile $blog->category_id = dise bunu yazacam
 //                                       echo '<pre>';
 //                                       print_r($categoryTranslation);
                             @endphp
@@ -38,6 +39,7 @@
                                     // Dil için ilgili çeviriyi bul
                                     $blogTranslation = $blog->translations
                                         ->where('language.lang', $language)->first();
+//                                    dd($blog);
                                 @endphp
 
                                 <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$language}}"
@@ -73,7 +75,8 @@
                     <label for="categorySelect">Category</label>
                     <select name="category" class="form-control" id="categorySelect">
                         @foreach($categoryTranslation as $item)
-                            <option value="{{$item->id ?? ''}}">{{ $item->name ?? '' }}</option>
+                            <option value="{{$item->id ?? ''}}"
+                                {{$item->category_id == $blog->category_id ? 'selected' : ''}}>{{ $item->name ?? '' }}</option>
                         @endforeach
                     </select>
                     @error('category')

@@ -1,9 +1,12 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Team Members</h2>
-    <a href="{{ route('admin.teams.create') }}" class="btn btn-success mb-3">Add Team Member</a>
-
+    <h2>Quotes</h2>
+    @if($rowCount < 3)
+     <a href="{{ route('admin.quotes.create') }}" class="btn btn-success mb-3">Add Quote Item</a>
+    @else
+        <p class="alert text-bg-primary">If there are less than 3 quote items, you can add a new one</p>
+    @endif
     @if(session('success'))
         <div class="alert alert-success mt-3">
             {{ session('success') }}
@@ -15,14 +18,13 @@
         </div>
     @endif
 
-    <div>
-{{--        @dd(config('app.languages'))--}}
+    <div class="mt-5">
         @foreach(config('app.languages') as $lang)
             @php
                 $urlLang = request()->segment(count(request()->segments()));
                 $backgroundClass = ($urlLang == $lang) ? 'bg-success text-white' : ''; // Eğer $lang URL'in en sonundaki dilse, background rengini değiştir
             @endphp
-            <a href="{{ route('admin.teams.index', ['lang' => $lang]) }}" class="border-2 border-success rounded p-2  m-1 bg-secondary {{ $backgroundClass }}">
+            <a href="{{ route('admin.quotes.index', ['lang' => $lang]) }}" class="border-2 border-success rounded p-2  m-1 bg-secondary {{ $backgroundClass }}">
                 <span>{{ $lang }}</span>
             </a>
         @endforeach
@@ -31,25 +33,25 @@
     <table class="table mt-3">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>#ID</th>
             <th>Image</th>
             <th>Title</th>
-            <th>Position</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($teams as $team)
+        @foreach($quotes as $quote)
             <tr>
-                <td>{{ $team->id }}</td>
-                <td><img src="{{ url('storage/' . $team->image) }}" alt="Team Member Image" width="100"></td>
-                <td>{{ $team->title }}</td>
-                @foreach($team->translations as $index )
-                <td>{{ $index->position ?? 'null' }}</td>
+                <td>{{ $quote->id }}</td>
+                <td><img src="{{ url('storage/' . $quote->image) }}" alt="Quote Item Image" width="100"></td>
+                @foreach($quote->translations as $item )
+                    <td>{{ $item->title }}</td>
+                    <td>{!!  substr($item->description, 0, 20) !!}{{  strlen($item->description) > 20 ? '[...]' : '' }}</td>
                 @endforeach
                 <td>
-                    <a href="{{ route('admin.teams.edit', ['team' => $team->id]) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('admin.teams.destroy', ['team' => $team->id]) }}" method="POST" class="d-inline">
+                    <a href="{{ route('admin.quotes.edit', ['quote' => $quote->id]) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('admin.quotes.destroy', ['quote' => $quote->id]) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

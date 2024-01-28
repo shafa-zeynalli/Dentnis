@@ -8,13 +8,13 @@
         <div>
             <ul class="navbar">
 {{--                @dd($categories);--}}
-                @foreach ($categories as $category)
+                @foreach ($categoriesAll as $category)
                     <li>
                         <a href=''><span> {{$category->translations->first()->name}} </span> </a>
                         <ul>
                             @foreach ($category->blogs as $blog)
                                 <li>
-                                    <a href="{{ url("$lang/$blog->slug") }}">{{ $blog->translations->first()->title}}</a>
+                                    <a href="{{ url("$blog->slug") }}">{{ $blog->translations->first()->title}}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -22,7 +22,7 @@
                 @endforeach
 
                     <li>
-                        <a href='{{route('front.about')}}'><span>Hakkimizda</span> </a>
+                        <a href='{{route('front.about')}}'><span>{{ __('Hakkımızda') }}</span> </a>
                         <ul>
 {{--                            @foreach ($category->blogs as $blog)--}}
 {{--                                <li>--}}
@@ -32,7 +32,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href='{{route('front.contact')}}'><span>Iletisim</span> </a>
+                        <a href='{{route('front.contact')}}'><span>{{ __('İletişim') }}</span> </a>
                     </li>
 
                 <a href="{{ url('/change-language/en') }}" class="{{ $lang == 'en' ? 'd-none' : '' }} lang"><img src="" alt="" id="en"></a>

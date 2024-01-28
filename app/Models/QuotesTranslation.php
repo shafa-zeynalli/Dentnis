@@ -9,8 +9,14 @@ class QuotesTranslation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quote_id',
+        'language_id',
+        'title',
+        'description'
+    ];
     public function language()
     {
-        return $this->hasMany(Language::class, 'id', 'language_id');
+        return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 }

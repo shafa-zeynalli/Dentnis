@@ -1,11 +1,12 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Edit Team Member</h2>
-    <div class="card my-4">
+    <h2>Edit Category Item</h2>
+    <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.teams.update')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.category.update')}}" method="POST" enctype="multipart/form-data">
                 {{--                {{ isset($model) ? route($routeName.'.update', $model->id) : route($routeName.'.store') }}--}}
+               @method('PUT')
                 @csrf
                 <div class="card card-primary card-tabs">
                     <div class="card-header p-0 pt-1">
@@ -13,7 +14,8 @@
                             @foreach(config('app.languages') as $lang)
                                 <li class="nav-item">
                                     <a class="nav-link {{$loop->first ? 'active show' : ''}} @error("$lang.title") text-danger @enderror"
-                                       id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#tab-{{$lang}}" role="tab"
+                                       id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#tab-{{$lang}}"
+                                       role="tab"
                                        aria-controls="custom-tabs-one-home" aria-selected="true">{{$lang}}</a>
                                 </li>
                             @endforeach
@@ -21,23 +23,22 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
-                            @foreach(config('app.languages') as $lang)
+
+                            @foreach(config('app.languages') as $index => $lang)
+                                @php
+                                    // Dil için ilgili çeviriyi bul
+                                    $categoryTranslation = $category->translations
+                                        ->where('language.lang', $lang)->first();
+//                                    dd($categoryTranslation);
+                                @endphp
                                 <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$lang}}"
-                                     role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                     role="tabpanel"
+                                     aria-labelledby="custom-tabs-one-home-tab">
                                     <div class="form-group">
-                                        <label for="{{$lang}}-title">Position</label>
-
-                                        @php
-                                            // Dil için ilgili çeviriyi bul
-                                            $positionTranslation = $team->translations
-                                                ->where('language.lang', $lang)->first();
-//                                            dd($positionTranslation);
-                                        @endphp
-
-                                        <input type="text" placeholder="Başlıq" name="{{$lang}}[title]"
-                                               value="{{ $positionTranslation ? $positionTranslation->position : '' }}"
+                                        <label for="{{$lang}}-title">Title</label>
+                                        <input type="text" placeholder="Title Name" name="{{$lang}}[title]"
+                                               value="{{ $categoryTranslation ? $categoryTranslation->name : '' }}"
                                                class="form-control" id="{{$lang}}-title">
-
                                         @error("$lang.title")
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -47,28 +48,8 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group py-2">
-                    <label>Ad, Soyad</label>
-                    <input name="firstName" class="form-control" type="text" value="{{$team->title}}"/>
-                    <input name="team_id" class="form-control" type="hidden" value="{{$team->id}}"/>
-                    @error('blogs_type_id')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group py-3">
-                    <label>Image</label>
-                    @isset($model)
-                        <br>
-                        <img width="200" src="{{ asset('storage/'.$model->image) }}">
-                    @endisset
-                    <input type="file" name="image" class="form-control">
-                    @error('image')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <button class="btn btn-success">Save</button>
+                <input type="hidden" name="category_id" value="{{$category->id}}">
+                <button class="btn btn-success my-4">Edit</button>
             </form>
         </div>
     </div>

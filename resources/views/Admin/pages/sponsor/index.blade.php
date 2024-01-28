@@ -26,7 +26,7 @@
             @foreach($sponsors as $sponsor)
                 <tr>
                     <td>{{ $sponsor->id }}</td>
-                    <td><img src="{{ $sponsor->image }}" alt="Sponsor Image" width="100"></td>
+                    <td><img src="{{ url('storage/' . $sponsor->image) }}" alt="Sponsor Image" width="100"></td>
                     <td>
                         <a href="{{ route('admin.sponsor.edit', ['sponsor' => $sponsor->id]) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('admin.sponsor.destroy', ['sponsor' => $sponsor->id]) }}" method="POST" class="d-inline">

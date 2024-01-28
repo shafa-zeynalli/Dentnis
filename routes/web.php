@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\TeamController;
@@ -23,7 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/category-create', [CategoryController::class, 'store']);
     Route::get('/category-edit/{category}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::put('/category-edit/update', [CategoryController::class, 'update'])->name('admin.category.update');
-    Route::delete('/category-delete/{category}', [TeamController::class, 'delete'])->name('admin.category.destroy');
+    Route::delete('/category-delete/{category}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
 
 
     Route::get('/teams/{lang}', [TeamController::class, 'index'])->name('admin.teams.index');
@@ -40,17 +41,24 @@ Route::prefix('admin')->group(function () {
     Route::post('/blogs-edit/update', [Blog::class, 'update'])->name('admin.blogs.update');
     Route::delete('/blogs-delete/{blog}', [Blog::class, 'destroy'])->name('admin.blogs.destroy');
 
+    Route::get('/quotes/{lang}', [QuoteController::class, 'index'])->name('admin.quotes.index');
+    Route::get('/quotes-create', [QuoteController::class, 'create'])->name('admin.quotes.create');
+    Route::post('/quotes-create', [QuoteController::class, 'store'])->name('admin.quotes.store');
+    Route::get('/quotes-edit/{quote}', [QuoteController::class, 'edit'])->name('admin.quotes.edit');
+    Route::put('/quotes-edit/update', [QuoteController::class, 'update'])->name('admin.quotes.update');
+    Route::delete('/quotes-delete/{quote}', [QuoteController::class, 'destroy'])->name('admin.quotes.destroy');
+
 });
 
 
 
+Route::get('/change-language/{language}', [BlogController::class, 'changeLanguage']);
 Route::get('/',[BlogController::class,'index'])->name('front.main');
 Route::get('/about',[BlogController::class,'about'])->name('front.about');
 Route::get('/contact',[BlogController::class,'contact'])->name('front.contact');
 Route::get('/article',[BlogController::class,'article']);
 Route::get('/tv-programs',[BlogController::class,'tvPrograms']);
-Route::get('/change-language/{language}', [BlogController::class, 'changeLanguage']);
-Route::get('/{lang}/{slug}',[BlogController::class,'singlePage']);
+Route::get('/{slug}',[BlogController::class,'singlePage']);
 
 
 

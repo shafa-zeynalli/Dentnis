@@ -1,12 +1,12 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Add Blog Item</h2>
+    <h2>Edit Quote Item</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.blogs.store')}}" method="POST" enctype="multipart/form-data">
-                {{--                {{ isset($model) ? route($routeName.'.update', $model->id) : route($routeName.'.store') }}--}}
-                @csrf
+            <form action="{{route('admin.quotes.update')}}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
+                 @csrf
                 <div class="card card-primary card-tabs">
                     <div class="card-header p-0 pt-1">
                         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -22,20 +22,13 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
-                            @php
-                                $categoryTranslation =[];
-                                   foreach ($categories as $category){
-                                    $categoryTranslation[] = $category->translations
-                                        ->where('language.lang', 'tr')->first();
-                                    }
-//                                    dd($categoryTranslation);
-//                                       echo '<pre>';
-//                                       print_r($categoryTranslation);
-                            @endphp
-
                             @foreach(config('app.languages') as $index => $language)
-{{--                                @dd($language)--}}
 
+                                @php
+                                    // Dil için ilgili çeviriyi bul
+                                    $quoteTranslation = $quote->translations
+                                        ->where('language.lang', $language)->first();
+                                @endphp
 
                                 <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$language}}"
                                      role="tabpanel"
@@ -45,18 +38,18 @@
                                     <div class="form-group">
                                         <label for="{{$language}}-title">Title</label>
                                         <input type="text" placeholder="Title" name="{{$language}}[title]"
-                                               value="{{old($language.'.title')}}"
+                                               value="{{ $quoteTranslation ? $quoteTranslation->title : '' }}"
                                                class="form-control" id="{{$language}}-title">
                                         @error("$language.title")
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group my-2">
-                                        <label for="summernote">Description</label>
-                                        <textarea type="text" name="{{$language}}[description]"
-                                                  id="summernote"
-                                                  class="form-control blogs">{{old($language.'.description')}}</textarea>
-                                        {{--                                        <div id="summernote{{$index}}_editor">{!! old($lang.'.description') !!}</div>--}}
+                                        <label for="{{$language}}-description">Description</label>
+                                        <input type="text" name="{{$language}}[description]"
+                                               id="{{$language}}-description"
+                                               value="{{ $quoteTranslation ? $quoteTranslation->description : '' }}"
+                                               class="form-control blogs"/>
                                         @error("$language.description")
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -67,19 +60,6 @@
                     </div>
                 </div>
 
-                <div class="form-group my-3">
-                    <label for="categorySelect">Category</label>
-                    <select name="category" class="form-control" id="categorySelect">
-                        @foreach($categoryTranslation as $item)
-                            <option value="">Select a category</option>
-                            <option value="{{$item->id ?? ''}}">{{ $item->name ?? '' }}</option>
-                        @endforeach
-                    </select>
-                    @error('category')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
                 <div class="form-group py-3">
                     <label>Image</label>
                     <input type="file" name="image" class="form-control" id="summernote">
@@ -87,9 +67,11 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <input type="hidden" name="quote_id" value="{{$quote->id}}">
 
 
-                <button class="btn btn-success">Save</button>
+
+                <button class="btn btn-success">Edit</button>
             </form>
         </div>
     </div>

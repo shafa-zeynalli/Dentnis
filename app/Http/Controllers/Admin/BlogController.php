@@ -20,11 +20,25 @@ class BlogController extends Controller
      */
     public function index($lang)
     {
-        $blogs = Blog::with(['translations' => function ($query) use ($lang) {
-            $query->whereHas('language', function ($subquery) use ($lang) {
-                $subquery->where('lang', $lang);
-            });
-        }])->get();
+//        $blogs = Blog::with(['translations' => function ($query) use ($lang) {
+//            $query->whereHas('language', function ($subquery) use ($lang) {
+//                $subquery->where('lang', $lang);
+//            });
+//        }])->get();
+
+        $blogs = Blog::with([
+            'translations' => function ($query) use ($lang) {
+                $query->whereHas('language', function ($subquery) use ($lang) {
+                    $subquery->where('lang', $lang);
+                });
+            },
+            'category.translations' => function ($query) use ($lang) {
+                $query->whereHas('language', function ($subquery) use ($lang) {
+                    $subquery->where('lang', $lang);
+                });
+            }
+        ])->get();
+//        dd($blogs);
         return view('Admin.pages.blog.index', compact('blogs'));
     }
 

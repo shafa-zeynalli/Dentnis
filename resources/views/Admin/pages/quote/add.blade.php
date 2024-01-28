@@ -1,10 +1,10 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Add Blog Item</h2>
+    <h2>Add Quote Item</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.blogs.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.quotes.store')}}" method="POST" enctype="multipart/form-data">
                 {{--                {{ isset($model) ? route($routeName.'.update', $model->id) : route($routeName.'.store') }}--}}
                 @csrf
                 <div class="card card-primary card-tabs">
@@ -22,17 +22,6 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
-                            @php
-                                $categoryTranslation =[];
-                                   foreach ($categories as $category){
-                                    $categoryTranslation[] = $category->translations
-                                        ->where('language.lang', 'tr')->first();
-                                    }
-//                                    dd($categoryTranslation);
-//                                       echo '<pre>';
-//                                       print_r($categoryTranslation);
-                            @endphp
-
                             @foreach(config('app.languages') as $index => $language)
 {{--                                @dd($language)--}}
 
@@ -52,12 +41,12 @@
                                         @enderror
                                     </div>
                                     <div class="form-group my-2">
-                                        <label for="summernote">Description</label>
-                                        <textarea type="text" name="{{$language}}[description]"
-                                                  id="summernote"
-                                                  class="form-control blogs">{{old($language.'.description')}}</textarea>
-                                        {{--                                        <div id="summernote{{$index}}_editor">{!! old($lang.'.description') !!}</div>--}}
-                                        @error("$language.description")
+                                        <label for="{{$language}}-description">Description</label>
+                                        <input type="text" name="{{$language}}[description]"
+                                                  id="{{$language}}-description"
+                                               value="{{ old($language.'.description')}}"
+                                                  class="form-control blogs"/>
+                                         @error("$language.description")
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
@@ -67,19 +56,6 @@
                     </div>
                 </div>
 
-                <div class="form-group my-3">
-                    <label for="categorySelect">Category</label>
-                    <select name="category" class="form-control" id="categorySelect">
-                        @foreach($categoryTranslation as $item)
-                            <option value="">Select a category</option>
-                            <option value="{{$item->id ?? ''}}">{{ $item->name ?? '' }}</option>
-                        @endforeach
-                    </select>
-                    @error('category')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
                 <div class="form-group py-3">
                     <label>Image</label>
                     <input type="file" name="image" class="form-control" id="summernote">
@@ -87,30 +63,10 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
-
                 <button class="btn btn-success">Save</button>
             </form>
         </div>
     </div>
-
-    <script>
-        $('#summernote.blogs').summernote({
-            placeholder: 'Description blogs',
-            tabsize: 5,
-            height: 700,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
-    </script>
-
 
 
     <!-- Include Bootstrap JS and Popper.js (required for Bootstrap) -->

@@ -24,17 +24,20 @@ class BlogController extends Controller
 //        session()->keep(['language']);
 
         App::setLocale($language);
-//        $locale = App::currentLocale();
+        $locale = App::currentLocale();
 //        dd($locale);
-        return redirect()->back();
+        return redirect()->route('front.main');
 //        return redirect()->route('front.main');
     }
 
 
     public function index()
     {
+        $locale = App::currentLocale();
+//        dd($locale);
 //        session()->flush();
         $lang = session()->get('language', 'tr');
+//        dd($lang);
         $sliders = Slider::get();
 
         $quotes = Quote::with(['translations' => function ($query) use ($lang) {
@@ -64,10 +67,10 @@ class BlogController extends Controller
         return view('Front.pages.main', compact('sliders', 'quotes','sponsors', 'youtube','teams', 'blogs'));
     }
 
-    public function singlePage($lang, $slug)
+    public function singlePage( $slug)
     {
 //        dd($slug);
-//        $lang = session()->get('language', 'tr');
+        $lang = session()->get('language', 'tr');
         $blogItem =  Blog::with(['translations' => function ($query) use ($lang) {
             $query->whereHas('language', function ($subquery) use ($lang) {
                 $subquery->where('lang', $lang);

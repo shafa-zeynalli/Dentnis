@@ -22,7 +22,8 @@
                 $urlLang = request()->segment(count(request()->segments()));
                 $backgroundClass = ($urlLang == $lang) ? 'bg-success text-white' : ''; // Eğer $lang URL'in en sonundaki dilse, background rengini değiştir
             @endphp
-            <a href="{{ route('admin.blogs.index', ['lang' => $lang]) }}" class="border-2 border-success rounded p-2  m-1 bg-secondary {{ $backgroundClass }}">
+            <a href="{{ route('admin.blogs.index', ['lang' => $lang]) }}"
+               class="border-2 border-success rounded p-2  m-1 bg-secondary {{ $backgroundClass }}">
                 <span>{{ $lang }}</span>
             </a>
         @endforeach
@@ -36,6 +37,7 @@
             <th>Slug</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Category Name</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -43,20 +45,26 @@
         @foreach($blogs as $blog)
             <tr>
                 <td>{{ $blog->id }}</td>
-                <td><img src="{{ $blog->image }}" alt="Blog Item Image" width="100"></td>
+                <td><img src="{{ url('storage/' . $blog->image) }}" alt="Blog Item Image" width="100"></td>
                 <td>{{ $blog->slug }}</td>
                 @foreach($blog->translations as $item )
                     <td>{{ $item->title }}</td>
                     <td>{!!  substr($item->description, 0, 20) !!}{{  strlen($item->description) > 20 ? '[...]' : '' }}</td>
-
-{{--                    <td>{{ $item->description ?? 'null' }}</td>--}}
                 @endforeach
+
+                @if ($blog->category->count() > 0)
+                    @foreach($blog->category->translations as $item)
+                        <td>{{$item->name}}</td>
+                    @endforeach
+                @endif
                 <td>
                     <a href="{{ route('admin.blogs.edit', ['blog' => $blog->id]) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('admin.blogs.destroy', ['blog' => $blog->id]) }}" method="POST" class="d-inline">
+                    <form action="{{ route('admin.blogs.destroy', ['blog' => $blog->id]) }}" method="POST"
+                          class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete
+                        </button>
                     </form>
                 </td>
             </tr>

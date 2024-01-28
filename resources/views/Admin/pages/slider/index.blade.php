@@ -26,7 +26,7 @@
             @foreach($sliders as $slider)
                 <tr>
                     <td>{{ $slider->id }}</td>
-                    <td><img src="{{ $slider->image }}" alt="Slider Image" width="100"></td>
+                    <td><img src="{{ url('storage/' . $slider->image) }}" alt="Slider Image" width="100"></td>
                     <td>
                         <a href="{{ route('admin.slider.edit', ['slider' => $slider->id]) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('admin.slider.destroy', ['slider' => $slider->id]) }}" method="POST" class="d-inline">
