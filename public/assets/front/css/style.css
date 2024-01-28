@@ -113,13 +113,13 @@ body {
                     padding: 0 20px;
                     line-height: 60px;
                     font-size: 15px;
+                    width: 70px;
 
                     & img {
-                        padding: 9px;
-                        /*width: 20px;*/
+                        width: 100%;
                         height: auto;
-                        background-repeat: no-repeat !important;
-                        background-size: cover;
+                        /*background-repeat: no-repeat !important;*/
+                        /*background-size: cover;*/
                         align-items: center;
                         justify-content: center;
                     }

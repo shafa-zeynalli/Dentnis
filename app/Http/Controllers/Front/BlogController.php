@@ -33,8 +33,6 @@ class BlogController extends Controller
 
     public function index()
     {
-        $locale = App::currentLocale();
-//        dd($locale);
 //        session()->flush();
         $lang = session()->get('language', 'tr');
 //        dd($lang);

@@ -35,9 +35,13 @@
                         <a href='{{route('front.contact')}}'><span>{{ __('İletişim') }}</span> </a>
                     </li>
 
-                <a href="{{ url('/change-language/en') }}" class="{{ $lang == 'en' ? 'd-none' : '' }} lang"><img src="" alt="" id="en"></a>
-                <a href="{{ url('/change-language/gr') }}" class="{{ $lang == 'gr' ? 'd-none' : '' }} lang"><img src="" alt="" id="gr"></a>
-                <a href="{{ url('/change-language/tr') }}" class="{{ $lang== 'tr' ? 'd-none' : '' }} lang"><img alt="" src="" id="tr"></a>
+                @foreach($languages as $language)
+                <a href='{{ url('/change-language/' . $language->lang) }}' class="{{ $lang == $language->lang ? 'd-none' : '' }} lang"><img src="{{ url('storage/' . $language->image) }}" alt="Language image"></a>
+                @endforeach
+
+                {{--                <a href="{{ url('/change-language/en') }}" class="{{ $lang == 'en' ? 'd-none' : '' }} lang"><img src="" alt="" id="en"></a>--}}
+{{--                <a href="{{ url('/change-language/gr') }}" class="{{ $lang == 'gr' ? 'd-none' : '' }} lang"><img src="" alt="" id="gr"></a>--}}
+{{--                <a href="{{ url('/change-language/tr') }}" class="{{ $lang== 'tr' ? 'd-none' : '' }} lang"><img alt="" src="" id="tr"></a>--}}
             </ul>
             <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>

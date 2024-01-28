@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Language;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -48,7 +49,9 @@ class AppServiceProvider extends ServiceProvider
                 });
             }])->get();
 //            dd($lang);
-            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral'));
+
+            $languages=Language::all();
+            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages'));
         });
     }
 }
