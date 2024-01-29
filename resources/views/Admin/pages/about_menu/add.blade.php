@@ -1,10 +1,10 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Add Blog Item</h2>
+    <h2>Add About Menu Item</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.blogs.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.about_menu.store')}}" method="POST" enctype="multipart/form-data">
                 {{--                {{ isset($model) ? route($routeName.'.update', $model->id) : route($routeName.'.store') }}--}}
                 @csrf
                 <div class="card card-primary card-tabs">
@@ -22,19 +22,8 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
-                            @php
-                                $categoryTranslation =[];
-                                   foreach ($categories as $category){
-                                    $categoryTranslation[] = $category->translations
-                                        ->where('language.lang', 'tr')->first();
-                                    }
-//                                    dd($categories);
-//                                       echo '<pre>';
-//                                       print_r($categoryTranslation);
-                            @endphp
-
                             @foreach(config('app.languages') as $index => $language)
-                                {{--                                @dd($language)--}}
+{{--                                @dd($language)--}}
 
 
                                 <div class="tab-pane fade {{$loop->first ? 'active show' : ''}}" id="tab-{{$language}}"
@@ -51,70 +40,16 @@
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group my-2">
-                                        <label for="summernote">Description</label>
-                                        <textarea type="text" name="{{$language}}[description]"
-                                                  id="summernote"
-                                                  class="form-control blogs">{{old($language.'.description')}}</textarea>
-                                        {{--                                        <div id="summernote{{$index}}_editor">{!! old($lang.'.description') !!}</div>--}}
-                                        @error("$language.description")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group my-3">
-                    <label for="categorySelect">Category</label>
-                    <select name="category" class="form-control" id="categorySelect">
-                                <option value="">Select a category</option>
-                        @foreach($categoryTranslation as $item)
-                            @foreach($categories as $category)
-                                @if($category->id == $item->category_id)
-                                <option value="{{$category->id ?? ''}}">{{ $item->name ?? '' }}</option>
-                                @endif
-                            @endforeach
-                        @endforeach
-                    </select>
-                    @error('category')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group py-3">
-                    <label>Image</label>
-                    <input type="file" name="image" class="form-control" id="summernote">
-                    @error('image')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-                <button class="btn btn-success">Save</button>
+                <button class="btn btn-success my-3">Save</button>
             </form>
         </div>
     </div>
-
-    <script>
-        $('#summernote.blogs').summernote({
-            placeholder: 'Description blogs',
-            tabsize: 5,
-            height: 700,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
-    </script>
-
 
 
     <!-- Include Bootstrap JS and Popper.js (required for Bootstrap) -->

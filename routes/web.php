@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutMenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
@@ -52,9 +53,15 @@ Route::prefix('admin')->group(function () {
     Route::put('/quotes-edit/update', [QuoteController::class, 'update'])->name('admin.quotes.update');
     Route::delete('/quotes-delete/{quote}', [QuoteController::class, 'destroy'])->name('admin.quotes.destroy');
 
+
+    Route::get('/about_menu/{lang}', [AboutMenuController::class, 'index'])->name('admin.about_menu.index');
+    Route::get('/about_menu-create', [AboutMenuController::class, 'create'])->name('admin.about_menu.create');
+    Route::post('/about_menu-create', [AboutMenuController::class, 'store'])->name('admin.about_menu.store');
+    Route::get('/about_menu-edit/{menu}', [AboutMenuController::class, 'edit'])->name('admin.about_menu.edit');
+    Route::put('/about_menu-edit/update', [AboutMenuController::class, 'update'])->name('admin.about_menu.update');
+    Route::delete('/about_menu-delete/{menu}', [AboutMenuController::class, 'destroy'])->name('admin.about_menu.destroy');
+
 });
-
-
 
 Route::get('/change-language/{language}', [BlogController::class, 'changeLanguage']);
 Route::get('/',[BlogController::class,'index'])->name('front.main');

@@ -62,7 +62,7 @@ class BlogController extends Controller
     {
         $languages = config('app.languages');
         $validationRules = [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
             "category" => 'required'
         ];
 

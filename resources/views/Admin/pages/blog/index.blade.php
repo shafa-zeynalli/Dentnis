@@ -44,15 +44,16 @@
         <tbody>
         @foreach($blogs as $blog)
             <tr>
+{{--                @dd($blog)--}}
+
                 <td>{{ $blog->id }}</td>
                 <td><img src="{{ url('storage/' . $blog->image) }}" alt="Blog Item Image" width="100"></td>
                 <td>{{ $blog->slug }}</td>
                 @foreach($blog->translations as $item )
                     <td>{{ $item->title }}</td>
-                    <td>{!!  substr($item->description, 0, 20) !!}{{  strlen($item->description) > 20 ? '[...]' : '' }}</td>
+                    <td>{!! Str::limit(strip_tags($item->description),20)  !!}</td>
                 @endforeach
-
-                @if ($blog->category->count() > 0)
+                @if ($blog->category && $blog->category->count() > 0)
                     @foreach($blog->category->translations as $item)
                         <td>{{$item->name}}</td>
                     @endforeach

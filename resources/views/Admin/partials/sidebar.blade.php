@@ -12,6 +12,7 @@
                     class="app-menu__label">Categories</span></a></li>
         <li><a class="app-menu__item active" href="{{route('admin.teams.index',$lang)}}"><span class="app-menu__label">Teams</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.quotes.index',$lang)}}"><span class="app-menu__label">Quotes</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.about_menu.index',$lang)}}"><span class="app-menu__label">About Us Menu</span></a>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                     class="app-menu__icon bi bi-table"></i><span class="app-menu__label">Tables</span><i

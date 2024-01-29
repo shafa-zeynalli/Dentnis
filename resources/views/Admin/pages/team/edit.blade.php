@@ -59,10 +59,6 @@
 
                 <div class="form-group py-3">
                     <label>Image</label>
-                    @isset($model)
-                        <br>
-                        <img width="200" src="{{ asset('storage/'.$model->image) }}">
-                    @endisset
                     <input type="file" name="image" class="form-control">
                     @error('image')
                     <span class="text-danger">{{ $message }}</span>
