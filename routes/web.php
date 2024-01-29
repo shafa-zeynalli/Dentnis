@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DoctorImageController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\SliderController;
@@ -18,6 +19,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/sliders', SliderController::class)->names('admin.slider');
     Route::put('/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
+
+    Route::resource('/doctor-images', DoctorImageController::class)->names('admin.d_image');
+    Route::put('/doctor-images/{image}', [DoctorImageController::class,'update'])->name('admin.d_image.edits');
 
     Route::resource('/sponsors', SponsorController::class)->names('admin.sponsor');
     Route::put('/sponsors/{sponsor}', [SponsorController::class,'update'])->name('admin.sponsor.edits');

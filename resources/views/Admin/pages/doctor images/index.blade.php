@@ -23,13 +23,13 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($sponsors as $sponsor)
+            @foreach($images as $image)
                 <tr>
-                    <td>{{ $sponsor->id }}</td>
-                    <td><img src="{{ url('storage/' . $sponsor->image) }}" alt="Sponsor Image" width="100"></td>
+                    <td>{{ $image->id }}</td>
+                    <td><img src="{{ url('storage/' . $image->image) }}" alt="Sponsor Image" width="100"></td>
                     <td>
-                        <a href="{{ route('admin.sponsor.edit', ['sponsor' => $sponsor->id]) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('admin.sponsor.destroy', ['sponsor' => $sponsor->id]) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.d_image.edit', ['image' => $image->id]) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('admin.d_image.destroy', ['image' => $image->id]) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

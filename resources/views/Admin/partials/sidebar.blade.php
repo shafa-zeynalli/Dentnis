@@ -2,6 +2,7 @@
 <aside class="app-sidebar">
     <ul class="app-menu">
         <li><a class="app-menu__item active" href="{{route('admin.slider.index')}}"><span class="app-menu__label">Slider Images</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.d_image.index')}}"><span class="app-menu__label">Doctor Images</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.language.index')}}"><span class="app-menu__label">Languages</span></a>
