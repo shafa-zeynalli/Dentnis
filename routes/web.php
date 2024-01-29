@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutMenuController;
+use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
@@ -60,6 +61,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/about_menu-edit/{menu}', [AboutMenuController::class, 'edit'])->name('admin.about_menu.edit');
     Route::put('/about_menu-edit/update', [AboutMenuController::class, 'update'])->name('admin.about_menu.update');
     Route::delete('/about_menu-delete/{menu}', [AboutMenuController::class, 'destroy'])->name('admin.about_menu.destroy');
+
+
+    Route::get('/about/{lang}', [AboutUsController::class, 'index'])->name('admin.about.index');
+    Route::get('/about-create', [AboutUsController::class, 'create'])->name('admin.about.create');
+    Route::post('/about-create', [AboutUsController::class, 'store'])->name('admin.about.store');
+    Route::get('/about-edit/{about}', [AboutUsController::class, 'edit'])->name('admin.about.edit');
+    Route::put('/about-edit/update', [AboutUsController::class, 'update'])->name('admin.about.update');
+    Route::delete('/about-delete/{about}', [AboutUsController::class, 'destroy'])->name('admin.about.destroy');
 
 });
 

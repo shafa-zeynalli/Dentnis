@@ -34,11 +34,13 @@
                 <li>
                     <a href='{{route('front.about')}}'><span>{{ __('Hakkımızda') }}</span> </a>
                     <ul>
-                        {{--                            @foreach ($category->blogs as $blog)--}}
-                        {{--                                <li>--}}
-                        {{--                                    <a href="">{{ $blog->translations->first()->title  }}</a>--}}
-                        {{--                                </li>--}}
-                        {{--                            @endforeach--}}
+                        @foreach ($aboutMenu as $menu)
+                            @if ($menu->translations->isNotEmpty())
+                            <li>
+                                <a href="{{$menu->slug}}">{{ $menu->translations->first()->title  }}</a>
+                            </li>
+                            @endif
+                        @endforeach
                     </ul>
                 </li>
                 <li>

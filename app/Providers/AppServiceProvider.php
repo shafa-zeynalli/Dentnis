@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AboutMenu;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Language;
@@ -51,7 +52,14 @@ class AppServiceProvider extends ServiceProvider
 //            dd($lang);
 
             $languages=Language::all();
-            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages'));
+            $aboutMenu = AboutMenu::with(['translations' => function ($query) use ($lang) {
+                $query->whereHas('language', function ($subquery) use ($lang) {
+                    $subquery->where('lang', $lang);
+                });
+            }])->get();
+//            dd($aboutMenu);
+
+            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages','aboutMenu'));
         });
     }
 }

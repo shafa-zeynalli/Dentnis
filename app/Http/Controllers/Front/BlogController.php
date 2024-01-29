@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\AboutUs;
 use App\Models\Blog;
 
 use App\Models\Category;
@@ -19,15 +20,16 @@ use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-    public function changeLanguage($language){
+    public function changeLanguage($language)
+    {
         session()->put('language', $language);
 //        session()->keep(['language']);
 
         App::setLocale($language);
         $locale = App::currentLocale();
 //        dd($locale);
+        return redirect()->back();
         return redirect()->route('front.main');
-//        return redirect()->route('front.main');
     }
 
 
@@ -62,31 +64,37 @@ class BlogController extends Controller
         }])->inRandomOrder()->limit(9)->get();
 //        $blogs = Blog::with('translations')->get();
 //        dd($lang, $teams);
-        return view('Front.pages.main', compact('sliders', 'quotes','sponsors', 'youtube','teams', 'blogs'));
+        return view('Front.pages.main', compact('sliders', 'quotes', 'sponsors', 'youtube', 'teams', 'blogs'));
     }
 
-    public function singlePage( $slug)
+    public function singlePage($slug)
     {
 //        dd($slug);
         $lang = session()->get('language', 'tr');
-        $blogItem =  Blog::with(['translations' => function ($query) use ($lang) {
+        $blogItem = Blog::with(['translations' => function ($query) use ($lang) {
             $query->whereHas('language', function ($subquery) use ($lang) {
                 $subquery->where('lang', $lang);
             });
-        }])->where('slug',$slug)->get();
+        }])->where('slug', $slug)->get();
 
-        $blogs= Blog::with(['translations' => function ($query) use ($lang) {
+        $blogs = Blog::with(['translations' => function ($query) use ($lang) {
             $query->whereHas('language', function ($subquery) use ($lang) {
                 $subquery->where('lang', $lang);
             });
         }])->inRandomOrder()->limit(3)->get();
 //        dd($blogs);
-        return view('Front.pages.singlePage', compact('blogItem','blogs'));
+        return view('Front.pages.singlePage', compact('blogItem', 'blogs'));
     }
 
     public function about()
     {
-        return view('Front.pages.about');
+        $lang = session()->get('language', 'tr');
+        $about = AboutUs::with(['translations' => function ($query) use ($lang) {
+            $query->whereHas('language', function ($subquery) use ($lang) {
+                $subquery->where('lang', $lang);
+            });
+        }])->get();
+        return view('Front.pages.about', compact('about'));
     }
 
     public function contact()
@@ -102,12 +110,6 @@ class BlogController extends Controller
     public function article()
     {
         return view('Front.pages.articles');
-    }
-
-
-    public function ass(){
-        dd('yes');
-        return view('Layouts.admin');
     }
 
 

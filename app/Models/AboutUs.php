@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AboutUs extends Model
 {
     use HasFactory;
+    public function translations()
+    {
+        return $this->hasMany(AboutUsTranslation::class);
+    }
 }
