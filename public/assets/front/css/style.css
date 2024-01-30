@@ -269,14 +269,17 @@ body {
     top: 35%;
     box-shadow: 3px 5px 20px 6px rgba(14, 14, 14, 0.41);
 
-    > ul li {
-        padding: 15px 10px;
-        list-style-type: none;
-        color: white;
+    > ul {
+        padding: 0;
+        >li {
+            padding: 10px 5px;
+            list-style-type: none;
+            color: white;
 
-        & img {
-            width: 30px;
-            filter: invert(1)
+            & img {
+                width: 30px;
+                filter: invert(1)
+            }
         }
     }
 }

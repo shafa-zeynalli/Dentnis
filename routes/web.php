@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DoctorImageController;
 use App\Http\Controllers\Admin\HeadDoctorController;
+use App\Http\Controllers\Admin\IconController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\SettingController;
@@ -26,6 +27,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/youtubes', YoutubeController::class)->names('admin.youtube');
     Route::put('/youtubes/{youtube}', [SliderController::class,'update'])->name('admin.youtube.edits');
+
+    Route::resource('/icons', IconController::class)->names('admin.icon');
+    Route::put('/icons/{icon}', [IconController::class,'update'])->name('admin.icon.edits');
 
     Route::resource('/images', DoctorImageController::class)->names('admin.d_image');
     Route::put('/doctor-images/{image}', [DoctorImageController::class,'update'])->name('admin.d_image.edits');

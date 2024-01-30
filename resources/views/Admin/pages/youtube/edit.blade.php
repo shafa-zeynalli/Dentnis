@@ -9,7 +9,7 @@
                 @method('PUT')
                 <div class="form-group py-3">
                     <label>Url</label>
-                    <input type="text" name="url" class="form-control" id="summernote">
+                    <input type="text" name="url" class="form-control" id="summernote" value="{{$youtube->url}}">
                     @error('url')
                     <span class="text-danger">{{ $message }} </span>
                     @enderror

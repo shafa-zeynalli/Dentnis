@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\AboutMenu;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Icon;
 use App\Models\Language;
+use App\Models\Setting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -57,9 +59,11 @@ class AppServiceProvider extends ServiceProvider
                     $subquery->where('lang', $lang);
                 });
             }])->get();
+            $settings = Setting::all();
+            $icons = Icon::all();
 //            dd($aboutMenu);
 
-            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages','aboutMenu'));
+            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages','aboutMenu','icons','settings'));
         });
     }
 }
