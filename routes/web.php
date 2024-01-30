@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TvProgramController;
+use App\Http\Controllers\Admin\YoutubeController;
 use App\Http\Controllers\Front\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/sliders', SliderController::class)->names('admin.slider');
     Route::put('/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
+
+    Route::resource('/youtubes', YoutubeController::class)->names('admin.youtube');
+    Route::put('/youtubes/{youtube}', [SliderController::class,'update'])->name('admin.youtube.edits');
 
     Route::resource('/images', DoctorImageController::class)->names('admin.d_image');
     Route::put('/doctor-images/{image}', [DoctorImageController::class,'update'])->name('admin.d_image.edits');

@@ -5,6 +5,7 @@
         <li><a class="app-menu__item active" href="{{route('admin.d_image.index')}}"><span class="app-menu__label">Doctor Images</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.youtube.index')}}"><span class="app-menu__label">Youtube</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.program.index')}}"><span class="app-menu__label">Tv Programs</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.setting.index')}}"><span class="app-menu__label">Settings</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.language.index')}}"><span class="app-menu__label">Languages</span></a>

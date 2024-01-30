@@ -21,6 +21,7 @@
             <th>Address</th>
             <th>Mail</th>
             <th>Phone</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +34,7 @@
 {{--                <td>{{ $setting->bottom_logo }}</td>--}}
                 <td>{{ $setting->address }}</td>
                 <td>{{ $setting->mail }}</td>
-                <td>{{ $setting->Phone }}</td>
+                <td>{{ $setting->phone }}</td>
                 <td>
                     <a href="{{ route('admin.setting.edit', ['setting' => $setting->id]) }}" class="btn btn-primary">Edit</a>
                     <form action="{{ route('admin.setting.destroy', ['setting' => $setting->id]) }}" method="POST"
