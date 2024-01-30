@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DoctorImage extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'image',
+    ];
 }

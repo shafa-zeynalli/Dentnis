@@ -8,11 +8,14 @@ use App\Models\Blog;
 
 use App\Models\Category;
 use App\Models\CategoryTranslation;
+use App\Models\DoctorImage;
+use App\Models\HeadDoctor;
 use App\Models\Language;
 use App\Models\Quote;
 use App\Models\Slider;
 use App\Models\Sponsor;
 use App\Models\Team;
+use App\Models\TvProgram;
 use App\Models\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -94,7 +97,19 @@ class BlogController extends Controller
                 $subquery->where('lang', $lang);
             });
         }])->get();
-        return view('Front.pages.about', compact('about'));
+        $images = DoctorImage::all();
+        return view('Front.pages.about', compact('about','images'));
+    }
+    public function doctorPageShow()
+    {
+        $lang = session()->get('language', 'tr');
+        $about = HeadDoctor::with(['translations' => function ($query) use ($lang) {
+            $query->whereHas('language', function ($subquery) use ($lang) {
+                $subquery->where('lang', $lang);
+            });
+        }])->get();
+        $images = DoctorImage::all();
+        return view('Front.pages.doctor_page', compact('about','images'));
     }
 
     public function contact()
@@ -104,12 +119,21 @@ class BlogController extends Controller
 
     public function tvPrograms()
     {
-        return view('Front.pages.tv-programs');
+        $programs = TvProgram::all();
+        return view('Front.pages.tv-programs', compact('programs'));
     }
 
     public function article()
     {
-        return view('Front.pages.articles');
+        $lang = session()->get('language', 'tr');
+
+        $blogs = Blog::with(['translations' => function ($query) use ($lang) {
+            $query->whereHas('language', function ($subquery) use ($lang) {
+                $subquery->where('lang', $lang);
+            });
+        }])->get();
+//        dd($blogs);
+        return view('Front.pages.articles', compact('blogs'));
     }
 
 

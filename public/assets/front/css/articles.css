@@ -1,11 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 .under-nav {
     height: 128px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

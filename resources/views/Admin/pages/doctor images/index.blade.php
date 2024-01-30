@@ -4,9 +4,9 @@
 @section('content')
 
 
-        <h2>Sponsor Images</h2>
+        <h2>Doctor Images</h2>
 
-        <a href="{{ route('admin.sponsor.create') }}" class="btn btn-success">Add Image</a>
+        <a href="{{ route('admin.d_image.create') }}" class="btn btn-success">Add Image</a>
 
         @if(session('success'))
             <div class="alert alert-success mt-3">

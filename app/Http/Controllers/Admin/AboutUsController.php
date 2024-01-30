@@ -8,6 +8,7 @@ use App\Models\AboutUsTranslation;
 use App\Models\Blog;
 use App\Models\BlogTranslation;
 use App\Models\Category;
+use App\Models\HeadDoctor;
 use App\Models\Language;
 use App\Models\Team;
 use App\Models\TeamTranslation;
@@ -27,6 +28,7 @@ class AboutUsController extends Controller
                 $subquery->where('lang', $lang);
             });
         }])->get();
+
 
 //        dd($abouts);
         return view('Admin.pages.about.index', compact('abouts'));
@@ -86,6 +88,7 @@ class AboutUsController extends Controller
      */
     public function edit(AboutUs  $about)
     {
+//        dd($about);
         return view('Admin.pages.about.edit', compact('about'));
 
     }

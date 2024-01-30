@@ -1,10 +1,10 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Edit Sponsor Image</h2>
+    <h2>Edit Doctor Image</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.sponsor.edits',['sponsor'=>$sponsor->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.d_image.edits', ['image' => $image->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group py-3">

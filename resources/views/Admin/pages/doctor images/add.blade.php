@@ -1,10 +1,10 @@
 @extends('Layouts.admin')
 
 @section('content')
-    <h2>Add Sponsor Image</h2>
+    <h2>Add Doctor Image</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.sponsor.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.d_image.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group py-3">

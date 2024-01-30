@@ -6,11 +6,14 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController as Blog;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DoctorImageController;
+use App\Http\Controllers\Admin\HeadDoctorController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\QuoteController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TvProgramController;
 use App\Http\Controllers\Front\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +23,18 @@ Route::prefix('admin')->group(function () {
     Route::resource('/sliders', SliderController::class)->names('admin.slider');
     Route::put('/sliders/{slider}', [SliderController::class,'update'])->name('admin.slider.edits');
 
-    Route::resource('/doctor-images', DoctorImageController::class)->names('admin.d_image');
+    Route::resource('/images', DoctorImageController::class)->names('admin.d_image');
     Route::put('/doctor-images/{image}', [DoctorImageController::class,'update'])->name('admin.d_image.edits');
+
 
     Route::resource('/sponsors', SponsorController::class)->names('admin.sponsor');
     Route::put('/sponsors/{sponsor}', [SponsorController::class,'update'])->name('admin.sponsor.edits');
+
+    Route::resource('/tv-programs', TvProgramController::class)->names('admin.program');
+    Route::put('/tv-programs/{program}', [TvProgramController::class,'update'])->name('admin.program.edits');
+
+    Route::resource('/settings', SettingController::class)->names('admin.setting');
+    Route::put('/settings/{setting}', [SettingController::class,'update'])->name('admin.setting.edits');
 
     Route::resource('/languages', LanguageController::class)->names('admin.language');
     Route::put('/languages/{language}', [LanguageController::class,'update'])->name('admin.language.edits');
@@ -74,14 +84,23 @@ Route::prefix('admin')->group(function () {
     Route::put('/about-edit/update', [AboutUsController::class, 'update'])->name('admin.about.update');
     Route::delete('/about-delete/{about}', [AboutUsController::class, 'destroy'])->name('admin.about.destroy');
 
+
+    Route::get('/head-doctor/{lang}', [HeadDoctorController::class, 'index'])->name('admin.doctor.index');
+    Route::get('/doctor-create', [HeadDoctorController::class, 'create'])->name('admin.doctor.create');
+    Route::post('/doctor-create', [HeadDoctorController::class, 'store'])->name('admin.doctor.store');
+    Route::get('/doctor-edit/{doctor}', [HeadDoctorController::class, 'edit'])->name('admin.doctor.edit');
+    Route::put('/doctor-edit/update', [HeadDoctorController::class, 'update'])->name('admin.doctor.update');
+    Route::delete('/doctor-delete/{doctor}', [HeadDoctorController::class, 'destroy'])->name('admin.doctor.destroy');
+
 });
 
 Route::get('/change-language/{language}', [BlogController::class, 'changeLanguage']);
 Route::get('/',[BlogController::class,'index'])->name('front.main');
 Route::get('/about',[BlogController::class,'about'])->name('front.about');
+Route::get('/tv-programlari',[BlogController::class,'tvPrograms'])->name('front.tv_program');
+Route::get('/drabdullkadir-narin',[BlogController::class,'doctorPageShow'])->name('front.dr_narin');
+Route::get('/makaleler',[BlogController::class,'article'])->name('front.article');
 Route::get('/contact',[BlogController::class,'contact'])->name('front.contact');
-Route::get('/article',[BlogController::class,'article']);
-Route::get('/tv-programs',[BlogController::class,'tvPrograms']);
 Route::get('/{slug}',[BlogController::class,'singlePage']);
 
 

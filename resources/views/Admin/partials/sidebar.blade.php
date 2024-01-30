@@ -5,6 +5,8 @@
         <li><a class="app-menu__item active" href="{{route('admin.d_image.index')}}"><span class="app-menu__label">Doctor Images</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.sponsor.index')}}"><span class="app-menu__label">Sponsors</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.program.index')}}"><span class="app-menu__label">Tv Programs</span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.setting.index')}}"><span class="app-menu__label">Settings</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.language.index')}}"><span class="app-menu__label">Languages</span></a>
         </li>
         <li><a class="app-menu__item active" href="{{route('admin.blogs.index',$lang)}}"><span class="app-menu__label">Blogs</span></a>
@@ -15,6 +17,7 @@
         <li><a class="app-menu__item active" href="{{route('admin.quotes.index',$lang)}}"><span class="app-menu__label">Quotes</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.about_menu.index',$lang)}}"><span class="app-menu__label">About Us Menu</span></a>
         <li><a class="app-menu__item active" href="{{route('admin.about.index',$lang)}}"><span class="app-menu__label">About </span></a>
+        <li><a class="app-menu__item active" href="{{route('admin.doctor.index',$lang)}}"><span class="app-menu__label">Head Doctor</span></a>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                     class="app-menu__icon bi bi-table"></i><span class="app-menu__label">Tables</span><i

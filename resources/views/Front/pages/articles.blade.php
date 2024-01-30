@@ -7,12 +7,12 @@
         <div class="under-nav">
             <div class="content">
                 <div class="top-title">
-                    Makaleler
+                    {{__("Makaleler")}}
                 </div>
                 <div class="bottom-title">
-                    <div class="bottom-left"><a href="">Anasayfa</a></div>
+                    <div class="bottom-left"><a href="">{{__("Anasayfa")}}</a></div>
                     <div class="icon"> ></div>
-                    <div class="bottom-right"><a href="">Makaleler</a></div>
+                    <div class="bottom-right"><a href="">{{__("Makaleler")}}</a></div>
                 </div>
             </div>
         </div>
@@ -20,18 +20,37 @@
 
         <div class="container-article">
             <div class="all-article">
-                @for($i = 0; $i < 12; $i++)
+                @if(isset($blogs))
+                @foreach($blogs as $item)
                     <div class="card" style="width: 18rem;">
-                        <img src="{{asset('assets/front/images/purple-background.png')}}" class="card-img-top"
+                        <img src="{{Storage::url( $item->image)}}" class="card-img-top"
                              alt="...">
                         <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dolores earum, eius eum inventore molestiae nihil officia optio repellendus saepe, sed sit soluta vitae. Accusantium beatae et ipsam tempora voluptate?</span>
+                            @foreach ($item->translations as $data)
+                            <h3 class="card-title">{{ $data->title }}</h3>
+                            <p class="card-text"><span>{!!  substr($data->description, 0, 200) !!}{{ strlen($data->description) > 200 ? '[...]' : '' }}</span>
                             </p>
-                            <a href="#" class="btn btn-primary">Devamını Oku</a>
+                            <a href="{{ url("$item->slug") }}" class="btn btn-primary">{{__("Devamını oku")}}</a>
+                            @endforeach
                         </div>
                     </div>
-                @endfor
+                    @endforeach
+                @endif
+{{--                    <div class="col">--}}
+{{--                        @if(isset($blog))--}}
+{{--                            <div class="image">--}}
+{{--                                <img src="{{ $blog->image }}" alt="">--}}
+{{--                            </div>--}}
+
+{{--                            <div class="content">--}}
+{{--                                @foreach ($blog->translations as $item)--}}
+{{--                                    <h2>{{ $item->title }}</h2>--}}
+{{--                                    <p>{!!  substr($item->description, 0, 200) !!}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>--}}
+{{--                                @endforeach--}}
+{{--                                <a href="{{ url("$blog->slug") }}">{{__("Devamını oku")}}</a>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
 
             </div>
         </div>

@@ -7,12 +7,12 @@
         <div class="under-nav">
             <div class="content">
                 <div class="top-title">
-                    Makaleler
+                    {{__("Makaleler")}}
                 </div>
                 <div class="bottom-title">
-                    <div class="bottom-left"><a href="">Anasayfa</a></div>
+                    <div class="bottom-left"><a href="">{{__("Anasayfa")}}</a></div>
                     <div class="icon"> ></div>
-                    <div class="bottom-right"><a href="">Makaleler</a></div>
+                    <div class="bottom-right"><a href="">{{__("Makaleler")}}</a></div>
                 </div>
             </div>
         </div>
@@ -20,18 +20,17 @@
 
         <div class="container-article">
             <div class="all-article">
-                @for($i = 0; $i < 12; $i++)
+                @foreach($programs as $program)
                     <div class="card" style="width: 18rem;">
-                        <iframe width="400" height="228" src="https://www.youtube.com/embed/RnZDMCzMwxI"
+                        <iframe width="400" height="228" src="{{$program->url}}"
                                 title="Ollie - perfect timing" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
                         <div class="video-title">
-                            <b> Bir Günde Diş implantı Tedavisi Estetik Diş Hekimi Dr.Abdulkadir Narin Çook Yaşa 6 Şubat
-                                2021 TV8 </b>
+                            <b> {{$program->title}}</b>
                         </div>
                     </div>
-                @endfor
+                @endforeach
 
             </div>
         </div>

@@ -18,7 +18,7 @@ class DoctorImageController extends Controller
 
     public function create()
     {
-        return view('Admin.pages.slider.add');
+        return view('Admin.pages.doctor images.add');
     }
 
     public function store(Request $request)
@@ -27,47 +27,49 @@ class DoctorImageController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
         ]);
 
-        Slider::create([
-            'image' => $request->file('image')->store('slider_images', 'public'),
+        DoctorImage::create([
+            'image' => $request->file('image')->store('doctor_images', 'public'),
         ]);
 
-        return redirect()->route('admin.slider.index')->with('success', 'Slider image added successfully!');
+        return redirect()->route('admin.d_image.index')->with('success', 'Doctor image added successfully!');
     }
 
-    public function edit(Slider $slider)
+    public function edit(DoctorImage $image)
     {
-        return view('Admin.pages.slider.edit', compact('slider'));
+//        dd($image);
+        return view('Admin.pages.doctor images.edit', compact('image'));
     }
 
-    public function update(Request $request, Slider $slider)
+    public function update(Request $request, DoctorImage $image)
     {
 //        dd($request->all());
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
         ]);
         if ($request->hasFile('image')) {
-            if (Storage::disk('public')->exists($slider->image)) {
-                Storage::disk('public')->delete($slider->image);
-
+//                dd($image);
+            if (!is_null($image->image) && is_string($image->image)) {
+                if (Storage::disk('public')->exists($image->image)) {
+                    Storage::disk('public')->delete($image->image);
+                }
             }
-            $slider->update([
-                'image' => $request->file('image')->store('slider_images', 'public'),
+            $image->update([
+                'image' => $request->file('image')->store('doctor_images', 'public'),
             ]);
         }
 
 
-
-        return redirect()->route('admin.slider.index')->with('success', 'Slider image updated successfully!');
+        return redirect()->route('admin.d_image.index')->with('success', 'Doctor image updated successfully!');
     }
 
-    public function destroy(Slider $slider)
+    public function destroy(DoctorImage $image)
     {
-        if (Storage::disk('public')->exists($slider->image)) {
-            Storage::disk('public')->delete($slider->image);
+        if (Storage::disk('public')->exists($image->image)) {
+            Storage::disk('public')->delete($image->image);
 
         }
-        $slider->delete();
-        return redirect()->route('admin.slider.index')->with('success', 'Slider image deleted successfully!');
+        $image->delete();
+        return redirect()->route('admin.d_image.index')->with('success', 'Doctor image deleted successfully!');
     }
 }
 
