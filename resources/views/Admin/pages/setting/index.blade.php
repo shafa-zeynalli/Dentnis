@@ -28,8 +28,8 @@
         @foreach($settings as $setting)
             <tr>
                 <td>{{ $setting->id }}</td>
-                <td><img src="{{Storage::url($setting->top_logo)}}" alt="" class="bg-dark py-2"></td>
-                <td><img src="{{Storage::url($setting->bottom_logo)}}" alt=""></td>
+                <td><img src="{{Storage::url($setting->top_logo)}}" alt="" ></td>
+                <td><img src="{{Storage::url($setting->bottom_logo)}}" alt="" class="bg-dark py-2"></td>
 {{--                <td>{{ $setting->top_logo }}</td>--}}
 {{--                <td>{{ $setting->bottom_logo }}</td>--}}
                 <td>{{ $setting->address }}</td>

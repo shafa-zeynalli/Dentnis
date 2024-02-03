@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -11,7 +13,38 @@ class AdminController extends Controller
         return view('Admin.pages.main');
     }
 
-    public function getSlider(){
-        return view('Admin.pages.slider');
+    public function showLoginForm(){
+        return view('Admin.pages.login.index');
     }
+
+    public function login(Request $request)
+    {
+        // Form verilerini doğrula
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Kullanıcıyı giriş yapmaya çalış
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            // Başarılı bir şekilde giriş yapıldıysa
+            return redirect()->route('admin.main'); // Yönlendirilecek sayfa
+        }
+
+        // Giriş başarısız ise
+        return back()->withErrors([
+            'email' => 'Giriş bilgileri hatalı. Lütfen tekrar deneyin.',
+        ]);
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('admin/login');
+    }
+
+
 }

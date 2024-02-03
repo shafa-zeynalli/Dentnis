@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 @extends('Layouts.front')
 
 @section('content')
@@ -9,17 +10,17 @@
         @foreach($blogItem as $blog)
             <div class="top">
                 <div>
-                    <p>Makaleler</p>
+                    <p>{{__("Makaleler")}}</p>
                     @foreach($blog->translations as $item)
                         <h1>{{$item->title}}</h1>
                     @endforeach
                 </div>
 
                 {{--            <img src="{{asset('assets/front/images/purple-background.png')}}" alt="">--}}
-                <img src="{{$blog->image}}" alt="">
+                <img src="{{Storage:: url($blog->image)}}" alt="">
             </div>
 
-            <div class="container">
+            <div class="container-singlepage">
                 @foreach($blog->translations as $item)
                     <p>{!! $item->description !!}</p>
                 @endforeach
@@ -27,12 +28,12 @@
         @endforeach
 
         <div class="others-section">
-            <h1>Other articles</h1>
+            <h1>{{__("Diğer makaleler")}}</h1>
             <div class="cols">
                 @foreach($blogs as $blog)
                     <a href="{{$blog->slug}}">
                         <div class="col-1">
-                            <img src="{{$blog->image}}" alt="">
+                            <img src="{{Storage:: url($blog->image)}}" alt="">
                             @foreach($blog->translations as $item)
                                 <p class="article-title">{{$item->title}}</p>
                             @endforeach

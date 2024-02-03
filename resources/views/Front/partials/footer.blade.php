@@ -1,16 +1,18 @@
 <footer class="footerMain">
     <div class="top-footer">
         <h2>{{__("Diş Estetiği ile ilgili sorunlarınız mı var?")}}</h2>
-        <a>{{__("Bize Ulaşın")}}</a>
+        <a href="{{route('front.contact')}}">{{__("Bize Ulaşın")}}</a>
     </div>
     <div class="bottom-footer">
         <div class="upper">
             <div class="logo-part">
                 <img src="https://dentnis.com/wp-content/uploads/2023/02/dentnis-logo-white-1.png" alt="">
                 <div class="address">
-                    <p class="address-line">{{__("Adres")}}: Valikonağı Caddesi, Narin Apartmanı</p>
-                    <p class="phone-number">{{__("Telefon")}}: +90 (212) 246 09 03</p>
-                    <p class="email">{{__("Mail")}}: info@dentnis.com</p>
+                    @foreach($settings as $setting)
+                    <p class="address-line">{{__("Adres")}}: {{$setting->address}}</p>
+                    <p class="phone-number">{{__("Telefon")}}: {{$setting->phone}}</p>
+                    <p class="email">{{__("Mail")}}: {{$setting->mail}}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="titles-part">

@@ -1,11 +1,15 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 <div class="header">
     <ul class="container1">
         <div class="image">
             <a href="{{route('front.main')}}">
-                <img src="https://dentnis.com/wp-content/uploads/2022/06/dentnis-logo-2.svg" alt="logo">
+                @foreach($settings as $setting)
+                    <img src="{{Storage::url($setting->top_logo)}}" alt="logo">
+                @endforeach
             </a>
         </div>
         <div>
+
             <ul class="navbar">
                 {{--                @dd($categories);--}}
 
@@ -36,9 +40,9 @@
                     <ul>
                         @foreach ($aboutMenu as $menu)
                             @if ($menu->translations->isNotEmpty())
-                            <li>
-                                <a href="{{$menu->slug}}">{{ $menu->translations->first()->title  }}</a>
-                            </li>
+                                <li>
+                                    <a href="{{$menu->slug}}">{{ $menu->translations->first()->title  }}</a>
+                                </li>
                             @endif
                         @endforeach
                     </ul>
@@ -61,4 +65,5 @@
             <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
     </ul>
+
 </div>

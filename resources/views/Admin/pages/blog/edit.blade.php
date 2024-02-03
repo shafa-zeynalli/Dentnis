@@ -23,7 +23,8 @@
                         <div class="tab-content" id="custom-tabs-one-tabContent">
                             @php
                                 $categoryTranslation =[];
-                                   foreach ($categoriesAll as $category){
+                                   foreach ($categoriesAdmin as $category){
+//                                dd($category);
                                     $categoryTranslation[] = $category->translations
                                         ->where('language.lang', 'tr')->first();
                                     }
@@ -73,9 +74,11 @@
 
                 <div class="form-group my-3">
                     <label for="categorySelect">Category</label>
+{{--                            @dd($categoryTranslation)--}}
+{{--                        @dd($categoryTranslation)--}}
                     <select name="category" class="form-control" id="categorySelect">
                         @foreach($categoryTranslation as $item)
-                            <option value="{{$item->id ?? ''}}"
+                            <option value="{{$item->category_id ?? ''}}"
                                 {{$item->category_id == $blog->category_id ? 'selected' : ''}}>{{ $item->name ?? '' }}</option>
                         @endforeach
                     </select>

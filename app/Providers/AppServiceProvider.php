@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             App::setLocale($lang);
 
 //            $lang = 'tr';
-//            $categories = Category::with(['translations', 'blogs.translations'])->get();
+            $categoriesAdmin = Category::with(['translations', 'blogs.translations'])->get();
 
             $categoriesAll = Category::with([
                 'translations' => function ($query) use ($lang) {
@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
             $icons = Icon::all();
 //            dd($aboutMenu);
 
-            $view->with(compact('categoriesAll', 'lang', 'blogsGeneral','languages','aboutMenu','icons','settings'));
+            $view->with(compact('categoriesAll', 'lang','categoriesAdmin', 'blogsGeneral','languages','aboutMenu','icons','settings'));
         });
     }
 }

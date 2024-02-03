@@ -9,7 +9,7 @@ body {
 }
 
 .header {
-    padding: 15px 0;
+    /*padding: 15px 0;*/
 
     .container1 {
         width: 96%;
@@ -48,7 +48,7 @@ body {
                     list-style-type: none;
                     position: relative;
                     border-right: 1px solid rgba(0, 0, 0, .05);
-                    padding: 0 20px;
+                    padding: 10px 20px;
                     line-height: 60px;
 
                     > a {
@@ -147,6 +147,16 @@ body {
             }
         }
     }
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+
+
+
+
 }
 
 .slider {
@@ -272,12 +282,12 @@ body {
     > ul {
         padding: 0;
         >li {
-            padding: 10px 5px;
+            padding: 13px 10px ;
             list-style-type: none;
             color: white;
 
             & img {
-                width: 30px;
+                width: 27px;
                 filter: invert(1)
             }
         }
@@ -684,9 +694,11 @@ body {
     }
 
     .logo-part {
+        width: 30%;
         border-right: 1px solid #919192;
-        padding: 0 200px 10px 20px;
+        padding: 0 0 10px ;
         line-height: 30px;
+        margin-left: 50px;
     }
 
     .upper {

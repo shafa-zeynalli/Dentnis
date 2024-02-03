@@ -46,7 +46,7 @@
         @foreach($blogs as $blog)
             <tr>
 {{--                @dd($blog)--}}
-
+{{--@dd($blog)--}}
                 <td>{{ $blog->id }}</td>
                 <td><img src="{{ url('storage/' . $blog->image) }}" alt="Blog Item Image" width="100"></td>
                 <td>{{ $blog->slug }}</td>

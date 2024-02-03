@@ -19,7 +19,13 @@ use App\Http\Controllers\Admin\YoutubeController;
 use App\Http\Controllers\Front\BlogController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+
+Route::get('admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('admin/login', [AdminController::class, 'login']);
+
+Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dentnis/dashboard',[AdminController::class,'index'])->name('admin.main');
 
     Route::resource('/sliders', SliderController::class)->names('admin.slider');
@@ -109,6 +115,7 @@ Route::get('/tv-programlari',[BlogController::class,'tvPrograms'])->name('front.
 Route::get('/drabdullkadir-narin',[BlogController::class,'doctorPageShow'])->name('front.dr_narin');
 Route::get('/makaleler',[BlogController::class,'article'])->name('front.article');
 Route::get('/contact',[BlogController::class,'contact'])->name('front.contact');
+Route::post('/contact',[BlogController::class,'addContact']);
 Route::get('/{slug}',[BlogController::class,'singlePage']);
 
 

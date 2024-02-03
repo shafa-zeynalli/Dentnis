@@ -27,7 +27,7 @@
                                     <div class="form-group">
                                             <label for="{{$lang}}-title">Vezife</label>
                                         <input type="text" placeholder="Başlıq" name="{{$lang}}[title]"
-                                               value="{{old($lang.'text')}}"
+                                               value="{{old($lang.'.title')}}"
                                                class="form-control" id="{{$lang}}-title">
                                         @error("$lang.title")
                                         <span class="text-danger">{{$message}}</span>

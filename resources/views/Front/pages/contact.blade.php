@@ -5,35 +5,52 @@
         <div class="subheader">
             <div class="container1">
                 <div class="columnOne">
-                    <h1>İletisim</h1>
+                    <h1>{{__("İletişim")}}</h1>
                     <ul>
-                        <li><a href="">Anasayfa</a></li>
+                        <li><a href="">{{__("Anasayfa")}}</a></li>
                         <span><i class="fa-solid fa-angle-right"></i></span>
-                        <li><a href="">İletisim</a></li>
+                        <li><a href="">{{__("İletişim")}}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+            @if(session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
         <div class="section1">
             <div class="row1">
-                <form action="">
+                <form action="{{route('front.contact')}}" method="post">
+                    @csrf
                     <div class="flex">
-                        <input type="text" name="firstname" placeholder="Ad, Soyad">
-                        <input type="number" name="phone" placeholder="Phone">
+                        <input type="text" name="full_name" placeholder="{{__("Ad, Soyad")}}" value="{{old('full_name')}}">
+                        @error('full_name'){{$message}}@enderror
+                        <input type="number" name="phone" placeholder="{{__("Telefon")}}" value="{{old('phone')}}">
+                        @error('phone'){{$message}}@enderror
+
                     </div>
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="text" name="title" placeholder="Konu">
-                    <textarea cols="40" rows="5" name="mesaj" placeholder="Mesaj"></textarea>
+                    <input type="email" name="email" placeholder="{{__("Email")}}" value="{{old('email')}}">
+                    @error('email'){{$message}}@enderror
+
+                    <input type="text" name="subject" placeholder="{{__("Konu")}}" value="{{old('subject')}}">
+                    @error('subject'){{$message}}@enderror
+
+                    <textarea cols="40" rows="5" name="message" placeholder="{{__("Mesaj")}}">{{old('message')}}</textarea>
+                    @error('message'){{$message}}@enderror
+
                     <label for="">
-                        <input type="checkbox">
-                        <a href=""> KVKK</a>'yı okudum, kabul ediyorum.
+                        <input type="checkbox" name="kvkk" value="1" {{ old('kvkk') ? 'checked' : '' }}>
+                        <a > KVKK</a>'yı {{__("okudum, kabul ediyorum")}}.
                     </label>
-                    <button>Gönder</button>
+                    @error('kvkk'){{$message}}@enderror
+
+                    <button>{{__("Gönder")}}</button>
                 </form>
 
-                <div class="errMessage">
-                    Bir veya daha fazla alanda hata bulundu. Lütfen kontrol edin ve tekrar deneyin.
-                </div>
+{{--                <div class="errMessage">--}}
+{{--                    Bir veya daha fazla alanda hata bulundu. Lütfen kontrol edin ve tekrar deneyin.--}}
+{{--                </div>--}}
             </div>
             <div class="row2">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d16491.755351405183!2d49.86224668359764!3d40.38313033265291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1saz!2saz!4v1705053966399!5m2!1saz!2saz"
@@ -43,20 +60,21 @@
         </div>
         <div class="section2">
             <div class="row1">
-                <h3>İletişim Bilgileri</h3>
-                <p><strong>Adres:</strong> Valikonağı Caddesi, Narin Apartmanı, No:167/4 Nişantaşı – Şişli / istanbul
-                </p>
-                <p><strong>Telefon:</strong> <a href="">+90 (212) 246 09 03</a></p>
-                <p><strong>Mail:</strong> <a href="">info@dentnis.com</a></p>
-                <p><strong>İnstagram:</strong> <a href="">@doktornarin</a></p>
+                <h3>{{__("İletişim Bilgileri")}}</h3>
+                @foreach($settings as $setting)
+                <p><strong>{{__("Adres")}}:</strong> {{$setting->address}} </p>
+                <p><strong>{{__("Telefon")}}:</strong> <a href="">{{$setting->phone}} </a></p>
+                <p><strong>{{__("Mail")}}:</strong> <a href="">{{$setting->mail}}</a></p>
+                @endforeach
+{{--                <p><strong>İnstagram:</strong> <a href="">@doktornarin</a></p>--}}
             </div>
             <span>
 
             <div class="row2">
 
-                <h3>Çalışma Saatleri</h3>
-                <p><strong>Pazartesi – Cumartesi:</strong> 08.30 – 19.00<br>
-                    <strong>Pazar:</strong> Kapalı
+                <h3>{{__("Çalışma Saatleri")}}</h3>
+                <p><strong>{{__("Pazartesi – Cumartesi")}}:</strong> 08.30 – 19.00<br>
+                    <strong>{{__("Pazar")}}:</strong> {{__("Kapalı")}}
                 </p>
             </div>
                 </span>

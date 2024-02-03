@@ -8,6 +8,7 @@ use App\Models\Blog;
 
 use App\Models\Category;
 use App\Models\CategoryTranslation;
+use App\Models\Contact;
 use App\Models\DoctorImage;
 use App\Models\HeadDoctor;
 use App\Models\Language;
@@ -115,6 +116,26 @@ class BlogController extends Controller
     public function contact()
     {
         return view('Front.pages.contact');
+    }
+    public function addContact(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            'kvkk' => 'required',
+        ]);
+//        dd($request->all());
+        Contact::create([
+            'full_name'=> $request->input('full_name'),
+                'phone' => $request->input('phone'),
+        'email' => $request->input('email'),
+        'subject' =>$request->input('subject'),
+        'message' =>$request->input('message'),
+        ]);
+        return redirect()->back()->with('success','İletişim bilgileriniz başarıyla gönderildi.');
     }
 
     public function tvPrograms()

@@ -85,3 +85,13 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleButton = document.querySelector('.toggle-menu');
+        var navbar = document.querySelector('.navbar');
+
+        toggleButton.addEventListener('click', function () {
+            navbar.classList.toggle('active');
+        });
+    });
+</script>

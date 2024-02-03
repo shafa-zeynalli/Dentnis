@@ -24,7 +24,7 @@ class SponsorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
         ]);
 
         Sponsor::create([
@@ -43,7 +43,7 @@ class SponsorController extends Controller
     {
 //        dd($request->all());
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,webp,jpg,gif,svg|max:2048',
         ]);
         if ($request->hasFile('image')) {
             if (Storage::disk('public')->exists($sponsor->image)) {

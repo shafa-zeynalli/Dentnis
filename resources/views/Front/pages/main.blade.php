@@ -23,7 +23,7 @@
                 @foreach($quotes as $quote)
 
                     <div class="col">
-                        <img src="{{$quote->image}}"
+                        <img src="{{Storage::url($quote->image)}}"
                              alt="">
                         @foreach($quote->translations as $item)
                             <p class="title">{{$item->title}}</p>
@@ -46,7 +46,7 @@
                             <div class="ust-padding">
                                 <div class="for-padding">
                                     <img
-                                        src="{{$sponsor->image}}">
+                                        src="{{Storage::url($sponsor->image)}}">
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                     @foreach($teams as $team)
                         <div class="swiper-slide mz">
                             <div class="top-section">
-                                <img src="{{$team->image}}">
+                                <img src="{{Storage::url($team->image)}}">
                             </div>
                             <div class="bottom-section">
                                 <h3 class="doctor-name">
@@ -109,7 +109,7 @@
                 @foreach($blogs as $blog)
                     <a href="{{ url("$blog->slug") }}">
                         <div class="image-container">
-                            <img src="{{$blog->image}}" alt="Image"
+                            <img src="{{Storage::url($blog->image)}}" alt="Image"
                                  style="width: 100%; height: 100%;">
                             <div class="image-overlay"></div>
                             @foreach($blog->translations as $item)
@@ -138,14 +138,14 @@
                     <div class="col">
                         @if(isset($blog))
                             <div class="image">
-                                <img src="{{ $blog->image }}" alt="">
+                                <img src="{{ Storage::url($blog->image )}}" alt="">
                             </div>
 
                             <div class="content">
                                 @foreach ($blog->translations as $item)
                                     <h2>{{ $item->title }}</h2>
-                                    <p>{!!  substr($item->description, 0, 200) !!}{{ strlen($item->description) > 200 ? '[...]' : '' }}</p>
-                                @endforeach
+                                    <p>{!! Str::limit(strip_tags($item->description), 200) !!}</p>
+                                 @endforeach
                                 <a href="{{ url("$blog->slug") }}">{{__("Devamını oku")}}</a>
                             </div>
                         @endif
