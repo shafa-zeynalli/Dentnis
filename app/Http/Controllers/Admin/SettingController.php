@@ -14,8 +14,9 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::all();
+        $rowCount = Setting::count();
 
-        return view('Admin.pages.setting.index', compact('settings'));
+        return view('Admin.pages.setting.index', compact('settings','rowCount'));
     }
 
     public function create()

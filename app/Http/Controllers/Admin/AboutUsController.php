@@ -29,9 +29,10 @@ class AboutUsController extends Controller
             });
         }])->get();
 
+        $rowCount = AboutUs::count();
 
 //        dd($abouts);
-        return view('Admin.pages.about.index', compact('abouts'));
+        return view('Admin.pages.about.index', compact('abouts','rowCount'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,5 +47,17 @@ class AdminController extends Controller
         return redirect('admin/login');
     }
 
+    public function showUsers()
+    {
+        $users=User::all();
+
+        return view('Admin.pages.user.index',compact('users'));
+    }
+    public function showContactMessages()
+    {
+        $contacts=Contact::all();
+
+        return view('Admin.pages.contact.index',compact('contacts'));
+    }
 
 }

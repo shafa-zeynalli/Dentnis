@@ -22,13 +22,16 @@
             <div class="all-article">
                 @if(isset($blogs))
                 @foreach($blogs as $item)
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <img src="{{Storage::url( $item->image)}}" class="card-img-top"
                              alt="...">
                         <div class="card-body">
                             @foreach ($item->translations as $data)
                             <h3 class="card-title">{{ $data->title }}</h3>
-                            <p class="card-text"><span>{!!  substr($data->description, 0, 200) !!}{{ strlen($data->description) > 200 ? '[...]' : '' }}</span>
+                            <p class="card-text"><span>
+{{--                                    <p>{!! Str::limit(strip_tags($item->description), 200) !!}</p>--}}
+                                    {!!  Str::limit(strip_tags( $data->description),  100) !!}
+                                </span>
                             </p>
                             <a href="{{ url("$item->slug") }}" class="btn btn-primary">{{__("Devamını oku")}}</a>
                             @endforeach

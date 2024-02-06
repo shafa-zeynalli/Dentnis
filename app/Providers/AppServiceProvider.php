@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
             }])->get();
             $settings = Setting::all();
             $icons = Icon::all();
-//            dd($aboutMenu);
+//            dd($categoriesAll,$lang);
 
             $view->with(compact('categoriesAll', 'lang','categoriesAdmin', 'blogsGeneral','languages','aboutMenu','icons','settings'));
         });

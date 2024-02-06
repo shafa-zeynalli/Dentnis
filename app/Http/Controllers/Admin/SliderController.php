@@ -42,7 +42,7 @@ class SliderController extends Controller
     {
 //        dd($request->all());
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
         if ($request->hasFile('image')) {
             if (Storage::disk('public')->exists($slider->image)) {

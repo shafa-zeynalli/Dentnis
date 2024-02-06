@@ -16,9 +16,11 @@
             <swiper-container class="mySwiper" navigation="true" pagination="true" keyboard="true" mousewheel="true"
                               css-mode="true">
                 @foreach($images as $item)
-                <swiper-slide><img
+                <swiper-slide>
+                    <img
                         src="{{Storage::url( $item->image)}}"
-                        alt=""></swiper-slide>
+                        alt="">
+                </swiper-slide>
                 @endforeach
             </swiper-container>
 

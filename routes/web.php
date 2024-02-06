@@ -26,6 +26,9 @@ Route::post('admin/login', [AdminController::class, 'login']);
 Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.user');
+    Route::get('/contacts', [AdminController::class, 'showContactMessages'])->name('admin.contact');
+
     Route::get('/dentnis/dashboard',[AdminController::class,'index'])->name('admin.main');
 
     Route::resource('/sliders', SliderController::class)->names('admin.slider');
@@ -106,7 +109,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/doctor-edit/update', [HeadDoctorController::class, 'update'])->name('admin.doctor.update');
     Route::delete('/doctor-delete/{doctor}', [HeadDoctorController::class, 'destroy'])->name('admin.doctor.destroy');
 
+
+
 });
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('front.search');
 
 Route::get('/change-language/{language}', [BlogController::class, 'changeLanguage']);
 Route::get('/',[BlogController::class,'index'])->name('front.main');

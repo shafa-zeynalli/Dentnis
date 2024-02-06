@@ -4,7 +4,13 @@
 @section('content')
     <h2>Settings</h2>
 
-    <a href="{{ route('admin.setting.create') }}" class="btn btn-success">Add Setting Item</a>
+    @if($rowCount < 1)
+        <a href="{{ route('admin.setting.create') }}" class="btn btn-success">Add Setting Item</a>
+    @else
+        <p class="alert text-bg-primary">If there are less than 2 setting items, you can add a new one</p>
+    @endif
+
+{{--    <a href="{{ route('admin.setting.create') }}" class="btn btn-success">Add Setting Item</a>--}}
 
     @if(session('success'))
         <div class="alert alert-success mt-3">

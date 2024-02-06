@@ -7,12 +7,12 @@
         <div class="under-nav">
             <div class="content">
                 <div class="top-title">
-                    {{__("Makaleler")}}
+                    {{__("TV Programları")}}
                 </div>
                 <div class="bottom-title">
                     <div class="bottom-left"><a href="">{{__("Anasayfa")}}</a></div>
                     <div class="icon"> ></div>
-                    <div class="bottom-right"><a href="">{{__("Makaleler")}}</a></div>
+                    <div class="bottom-right"><a href="">{{__("TV Programları")}}</a></div>
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
         <div class="container-article">
             <div class="all-article">
                 @foreach($programs as $program)
-                    <div class="card" style="width: 18rem;">
-                        <iframe width="400" height="228" src="{{$program->url}}"
+                    <div class="card">
+                        <iframe src="{{$program->url}}"
                                 title="Ollie - perfect timing" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
@@ -39,6 +39,6 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{asset('assets/front/css/articles.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('assets/front/css/articles.css')}}">--}}
     <link rel="stylesheet" href="{{asset('assets/front/css/tvPrograms.css')}}">
 @endpush

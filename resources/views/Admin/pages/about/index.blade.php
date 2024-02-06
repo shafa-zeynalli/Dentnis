@@ -2,8 +2,11 @@
 
 @section('content')
     <h2>Abouts</h2>
-    <a href="{{ route('admin.about.create') }}" class="btn btn-success mb-3">Add About Item</a>
-
+    @if($rowCount < 1)
+        <a href="{{ route('admin.about.create') }}" class="btn btn-success mb-3">Add About Item</a>
+    @else
+        <p class="alert text-bg-primary">If there are less than 2 about items, you can add a new one</p>
+    @endif
     @if(session('success'))
         <div class="alert alert-success mt-3">
             {{ session('success') }}

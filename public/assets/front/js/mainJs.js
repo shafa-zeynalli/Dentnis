@@ -46,14 +46,14 @@ var swiper = new Swiper(".mySwiper.my", {
         prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-        // 640: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 20,
-        // },
-        // 768: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 40,
-        // },
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+            },
+            768: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
         1024: {
             slidesPerView: 4,
             spaceBetween: 10,
@@ -62,9 +62,9 @@ var swiper = new Swiper(".mySwiper.my", {
 });
 
 var swiper = new Swiper(".mySwiper.my2", {
-    slidesPerView: 1,
+    slidesPerView: 4,
     spaceBetween: 10,
-    slidesPerGroup: 4,
+    slidesPerGroup: 1,
     speed: 1000,
     autoplay: {
         delay: 2000, // 1 saniye
@@ -79,14 +79,14 @@ var swiper = new Swiper(".mySwiper.my2", {
         prevEl: ".swiper-button-prev.my2",
     },
     breakpoints: {
-        // 640: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 20,
-        // },
-        // 768: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 40,
-        // },
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+        },
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+        },
         1024: {
             slidesPerView: 4,
             spaceBetween: 50,
