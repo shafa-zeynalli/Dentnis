@@ -59,5 +59,13 @@ class AdminController extends Controller
 
         return view('Admin.pages.contact.index',compact('contacts'));
     }
+    public function deleteContactMessages(Contact $contact)
+    {
+//        dd($contact);
+        $contact->delete();
+
+        return redirect()->back()->with('success', 'Contact deleted successfully.');
+
+    }
 
 }

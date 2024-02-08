@@ -18,4 +18,8 @@ class BlogTranslation extends Model
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');
     }
+    public function blog()
+    {
+        return $this->belongsTo(Blog::class, 'blog_id', 'id');
+    }
 }

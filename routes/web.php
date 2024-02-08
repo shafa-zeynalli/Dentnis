@@ -28,6 +28,7 @@ Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logo
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/users', [AdminController::class, 'showUsers'])->name('admin.user');
     Route::get('/contacts', [AdminController::class, 'showContactMessages'])->name('admin.contact');
+    Route::delete('/contacts/{contact}', [AdminController::class, 'deleteContactMessages'])->name('admin.contact.destroy');
 
     Route::get('/dentnis/dashboard',[AdminController::class,'index'])->name('admin.main');
 

@@ -48,7 +48,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-
+//        dd(config('app.languages'));
         $categories = Category::with('translations')->get();
 //        dd($categories);
         return view('Admin.pages.blog.add', compact('categories'));

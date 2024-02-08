@@ -78,14 +78,16 @@
             width: 100%;
             box-sizing: border-box;
             flex-wrap: wrap;
+            overflow-x: hidden;
         }
         .wraparrall {
+            overflow-x: hidden;
             padding: 20px 10px ;
         }
 
-        & iframe{
-            width: 40%;
-        }
+        /*& iframe{*/
+        /*    width: 100%;*/
+        /*}*/
     }
 }
 

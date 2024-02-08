@@ -175,6 +175,25 @@ body {
 
 
 @media screen and (max-width: 768px) {
+    .header {
+        .container1 {
+            /*width: 96%;*/
+            /*margin: 0 auto;*/
+            /*display: flex;*/
+            /*justify-content: space-between;*/
+            /*align-items: center;*/
+
+            .image {
+                width: 174px;
+
+                & img {
+                    width: 70%;
+                    height: auto;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
     .header .container1 .toggle-menu {
         display: flex; /* Göster */
     }

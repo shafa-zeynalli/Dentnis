@@ -17,7 +17,7 @@ class SearchController extends Controller
         $query = $request->input('query');
         $locale = session()->get('language','tr');
 //        dd(session());
-        $results = BlogTranslation::whereHas('language', function ($query) use ($locale) {
+        $results = BlogTranslation::with('blog')->whereHas('language', function ($query) use ($locale) {
             $query->where('lang', $locale);
         })->where('description', 'like', '%' . $query . '%')->get();
 

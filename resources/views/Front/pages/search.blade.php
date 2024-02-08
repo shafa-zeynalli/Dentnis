@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <h3 class="card-title">{{$result->title}}</h3>
                             <p class="card-text"><span>{!! Str::limit(strip_tags($result->description, 200)) !!}</span></p>
-                            <a href="" class="btn btn-primary">{{__("Devamını Oku")}}</a>
+                            <a href="{{$result->blog->slug}}" class="btn btn-primary">{{__("Devamını Oku")}}</a>
                         </div>
                     </div>
                     {{--                    @endif--}}

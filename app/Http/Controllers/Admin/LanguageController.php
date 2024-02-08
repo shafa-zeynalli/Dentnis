@@ -34,6 +34,12 @@ class LanguageController extends Controller
             'image' => $request->file('image')->store('language', 'public'),
         ]);
 
+        $languages = Language::pluck('lang')->toArray();
+        config([
+            'app.languages' => $languages,
+        ]);
+//        dd(config('app.languages'));
+
         return redirect()->route('admin.language.index')->with('success', 'Language Item added successfully!');
     }
 
