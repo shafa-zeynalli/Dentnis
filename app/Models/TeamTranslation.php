@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class TeamTranslation extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'teams_id',
-        'language_id',
-        'position'
-    ];
+//    protected $fillable = [
+//        'teams_id',
+//        'language_id',
+//        'position'
+//    ];
+    protected $guarded=[];
+
 
 
     public function language()

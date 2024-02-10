@@ -136,7 +136,6 @@ class BlogController extends Controller
 
         $blog = Blog::find($request->input('blog_id'));
 
-        // Eğer yeni kayıt ise dosyayı kaydet
         if ($request->hasFile('image')) {
             if (Storage::disk('public')->exists($blog->image)) {
                 Storage::disk('public')->delete($blog->image);

@@ -20,20 +20,16 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        // Form verilerini doğrula
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // Kullanıcıyı giriş yapmaya çalış
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            // Başarılı bir şekilde giriş yapıldıysa
-            return redirect()->route('admin.main'); // Yönlendirilecek sayfa
+            return redirect()->route('admin.main');
         }
 
-        // Giriş başarısız ise
         return back()->withErrors([
             'email' => 'Giriş bilgileri hatalı. Lütfen tekrar deneyin.',
         ]);

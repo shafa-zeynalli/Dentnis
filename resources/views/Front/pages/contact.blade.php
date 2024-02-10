@@ -48,9 +48,6 @@
                     <button>{{__("Gönder")}}</button>
                 </form>
 
-{{--                <div class="errMessage">--}}
-{{--                    Bir veya daha fazla alanda hata bulundu. Lütfen kontrol edin ve tekrar deneyin.--}}
-{{--                </div>--}}
             </div>
             <div class="row2">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d16491.755351405183!2d49.86224668359764!3d40.38313033265291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1saz!2saz!4v1705053966399!5m2!1saz!2saz"

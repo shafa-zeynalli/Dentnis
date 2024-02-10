@@ -22,7 +22,7 @@
         @foreach(config('app.languages') as $lang)
             @php
                 $urlLang = request()->segment(count(request()->segments()));
-                $backgroundClass = ($urlLang == $lang) ? 'bg-success text-white' : ''; // Eğer $lang URL'in en sonundaki dilse, background rengini değiştir
+                $backgroundClass = ($urlLang == $lang) ? 'bg-success text-white' : '';
             @endphp
             <a href="{{ route('admin.about_menu.index', ['lang' => $lang]) }}" class="border-2 border-success rounded p-2  m-1 bg-secondary {{ $backgroundClass }}">
                 <span>{{ $lang }}</span>

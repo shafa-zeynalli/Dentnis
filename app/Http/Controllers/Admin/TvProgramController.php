@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TvProgramController extends Controller
 {
-    //
+
     public function index()
     {
         $shows = TvProgram::all();

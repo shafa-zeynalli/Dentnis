@@ -9,8 +9,10 @@ class Language extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'lang',
-        'image'
-    ];
+//    protected $fillable = [
+//        'lang',
+//        'image'
+//    ];
+    protected $guarded=[];
+
 }

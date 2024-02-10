@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class AboutMenuTranslation extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'about_menu_id',
-        'language_id',
-        'title'
-    ];
+//    protected $fillable = [
+//        'about_menu_id',
+//        'language_id',
+//        'title'
+//    ];
+
+protected $guarded=[];
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');

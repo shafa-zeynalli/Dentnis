@@ -113,7 +113,6 @@ class QuoteController extends Controller
 
         $quote = Quote::find($request->input('quote_id'));
 
-        // Eğer yeni kayıt ise dosyayı kaydet
         if ($request->hasFile('image')) {
             if (Storage::disk('public')->exists($quote->image)) {
                 Storage::disk('public')->delete($quote->image);

@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Youtube extends Model
 {
     use HasFactory;
-    protected $fillable=['url'];
+//    protected $fillable=['url'];
+    protected $guarded=[];
+
 }

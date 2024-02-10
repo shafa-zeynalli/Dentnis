@@ -17,6 +17,7 @@ use App\Models\Slider;
 use App\Models\Sponsor;
 use App\Models\Team;
 use App\Models\TvProgram;
+use App\Models\User;
 use App\Models\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -33,12 +34,15 @@ class BlogController extends Controller
         $locale = App::currentLocale();
 //        dd($locale);
         return redirect()->back();
-        return redirect()->route('front.main');
+//        return redirect()->route('front.main');
     }
 
 
     public function index()
     {
+
+//        $deletedUsers = Slider::onlyTrashed()->get();
+//        dd($deletedUsers);
 //        session()->flush();
         $lang = session()->get('language', 'tr');
 //        dd($lang);
@@ -99,8 +103,9 @@ class BlogController extends Controller
             });
         }])->get();
         $images = DoctorImage::all();
-        return view('Front.pages.about', compact('about','images'));
+        return view('Front.pages.about', compact('about', 'images'));
     }
+
     public function doctorPageShow()
     {
         $lang = session()->get('language', 'tr');
@@ -110,13 +115,14 @@ class BlogController extends Controller
             });
         }])->get();
         $images = DoctorImage::all();
-        return view('Front.pages.doctor_page', compact('about','images'));
+        return view('Front.pages.doctor_page', compact('about', 'images'));
     }
 
     public function contact()
     {
         return view('Front.pages.contact');
     }
+
     public function addContact(Request $request)
     {
         $request->validate([
@@ -129,13 +135,13 @@ class BlogController extends Controller
         ]);
 //        dd($request->all());
         Contact::create([
-            'full_name'=> $request->input('full_name'),
-                'phone' => $request->input('phone'),
-        'email' => $request->input('email'),
-        'subject' =>$request->input('subject'),
-        'message' =>$request->input('message'),
+            'full_name' => $request->input('full_name'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
         ]);
-        return redirect()->back()->with('success','İletişim bilgileriniz başarıyla gönderildi.');
+        return redirect()->back()->with('success', 'İletişim bilgileriniz başarıyla gönderildi.');
     }
 
     public function tvPrograms()

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TvProgram extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'url', 'title'
-    ];
+//    protected $fillable=[
+//        'url', 'title'
+//    ];
+    protected $guarded=[];
+
 }

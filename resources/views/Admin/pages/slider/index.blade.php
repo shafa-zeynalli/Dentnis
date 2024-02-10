@@ -1,9 +1,5 @@
 @extends('Layouts.admin')
-
-
 @section('content')
-
-
         <h2>Slider Images</h2>
 
         <a href="{{ route('admin.slider.create') }}" class="btn btn-success">Add Image</a>

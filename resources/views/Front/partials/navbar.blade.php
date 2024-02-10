@@ -12,45 +12,48 @@
             <ul class="navbar">
                 {{--                @dd($categories);--}}
 
-{{--                                @dd($categoriesAll)--}}
-            <nav>
-                @foreach ($categoriesAll as $category)
+                {{--                                @dd($categoriesAll)--}}
+                <nav>
+                    @foreach ($categoriesAll as $category)
+                        <li>
+                            @if ($category->translations->isNotEmpty())
+                                <a href='#'
+                                   class="toggle-menu2"><span> {{$category->translations->first()->name}} </span><i
+                                        class="toggle-icon">+</i> </a>
+                            @endif
+
+
+                            <ul class="submenu">
+                                @foreach ($category->blogs as $blog)
+                                    @if ($blog->translations->isNotEmpty())
+                                        <li>
+                                            <a href="{{ url("$blog->slug") }}">{{ $blog->translations->first()->title}}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
+
+
                     <li>
-                        @if ($category->translations->isNotEmpty())
-                            <a href='#' class="toggle-menu2"><span> {{$category->translations->first()->name}} </span><i class="toggle-icon">+</i> </a>
-                        @endif
-
-
+                        <a href='{{route('front.about')}}'><span class="toggle-menu2">{{ __('Hakkımızda') }}</span><i
+                                class="toggle-icon">+</i> </a>
                         <ul class="submenu">
-                            @foreach ($category->blogs as $blog)
-                                @if ($blog->translations->isNotEmpty())
+                            @foreach ($aboutMenu as $menu)
+                                @if ($menu->translations->isNotEmpty())
                                     <li>
-                                        <a href="{{ url("$blog->slug") }}">{{ $blog->translations->first()->title}}</a>
+                                        <a href="{{$menu->slug}}">{{ $menu->translations->first()->title  }}</a>
                                     </li>
                                 @endif
                             @endforeach
                         </ul>
                     </li>
-                @endforeach
+                    <li>
+                        <a href='{{route('front.contact')}}'><span>{{ __('İletişim') }}</span> </a>
+                    </li>
 
-
-                <li>
-                    <a href='{{route('front.about')}}'  ><span class="toggle-menu2">{{ __('Hakkımızda') }}</span><i class="toggle-icon">+</i> </a>
-                    <ul class="submenu">
-                        @foreach ($aboutMenu as $menu)
-                            @if ($menu->translations->isNotEmpty())
-                                <li>
-                                    <a href="{{$menu->slug}}">{{ $menu->translations->first()->title  }}</a>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </li>
-                <li>
-                    <a href='{{route('front.contact')}}'><span>{{ __('İletişim') }}</span> </a>
-                </li>
-
-            </nav>
+                </nav>
                 @foreach($languages as $language)
                     <a href='{{ url('/change-language/' . $language->lang) }}'
                        class="{{ $lang == $language->lang ? 'd-none' : '' }} lang"><img
@@ -91,48 +94,39 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // DOM tamamen yüklendiğinde bu kod çalışır
         var toggleBtn = document.querySelector('.toggle-btn');
         var navbar = document.querySelector('.navbar>nav');
 
-        // Toggle butonuna tıklandığında navbar'ı göster/gizle
         toggleBtn.addEventListener('click', function () {
             if (navbar.style.left === '-700px' || navbar.style.left === '') {
                 navbar.style.display = 'block';
                 navbar.style.left = '0';
-                toggleBtn.textContent = '✕'; // Close ikonu
+                toggleBtn.textContent = '✕';
             } else {
                 navbar.style.left = '-700px';
                 navbar.style.display = 'none !important';
-                toggleBtn.textContent = '☰'; // Toggle menü ikonu
+                toggleBtn.textContent = '☰';
             }
         });
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Her toggle-menu öğesini seç
+    document.addEventListener("DOMContentLoaded", function () {
         const toggleIcons = document.querySelectorAll(".toggle-icon");
 
-        // Her toggle-menu için tıklama olayı ekle
-        toggleIcons.forEach(function(toggleIcon) {
-            toggleIcon.addEventListener("click", function(e) {
-                e.preventDefault(); // Sayfanın yenilenmesini engelle
+        toggleIcons.forEach(function (toggleIcon) {
+            toggleIcon.addEventListener("click", function (e) {
+                e.preventDefault();
 
-                // İlgili alt menüyü seç
                 const submenu = toggleIcon.parentElement.nextElementSibling;
 
-                // Alt menü durumunu kontrol et
                 const isOpen = submenu.classList.contains("open");
 
-                // Alt menüyü aç/kapat
                 if (isOpen) {
-                    // Alt menü zaten açık, kapat
                     submenu.style.maxHeight = 0;
                     submenu.classList.remove("open");
                     toggleIcon.textContent = "+";
                 } else {
-                    // Alt menü kapalı, aç
                     submenu.style.maxHeight = submenu.scrollHeight + "px";
                     submenu.classList.add("open");
                     toggleIcon.textContent = "-";

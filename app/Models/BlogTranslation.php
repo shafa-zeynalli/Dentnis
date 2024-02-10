@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class BlogTranslation extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'blog_id',
-        'language_id',
-        'title',
-        'description'
-    ];
+//    protected $fillable = [
+//        'blog_id',
+//        'language_id',
+//        'title',
+//        'description'
+//    ];
+
+    protected $guarded=[];
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');

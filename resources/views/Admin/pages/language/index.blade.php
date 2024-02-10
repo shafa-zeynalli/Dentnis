@@ -1,9 +1,5 @@
 @extends('Layouts.admin')
-
-
 @section('content')
-
-
         <h2>Languages</h2>
 
         <a href="{{ route('admin.language.create') }}" class="btn btn-success">Add Language Item</a>
@@ -41,6 +37,4 @@
             @endforeach
             </tbody>
         </table>
-
-
 @endsection

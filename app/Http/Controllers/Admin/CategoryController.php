@@ -101,7 +101,6 @@ class CategoryController extends Controller
             $language = Language::where('lang', $lang)->first();
             $langId = $language->id;
 
-            // Kategori çevirisini güncellemek yerine oluşturun
             $categoryTranslation = CategoryTranslation::updateOrCreate(
                 [
                     'language_id' => $langId,
@@ -131,5 +130,6 @@ class CategoryController extends Controller
             return redirect()->back()->with('success', 'Category deleted successfully.');
         } else {
             return redirect()->back()->with('error', 'Category not found.');
-        }    }
+        }
+    }
 }

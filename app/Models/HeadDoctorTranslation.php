@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class HeadDoctorTranslation extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'head_doctor_id',
-        'language_id',
-        'description'
-    ];
+//    protected $fillable = [
+//        'head_doctor_id',
+//        'language_id',
+//        'description'
+//    ];
+    protected $guarded=[];
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');

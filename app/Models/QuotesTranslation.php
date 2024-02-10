@@ -9,12 +9,14 @@ class QuotesTranslation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'quote_id',
-        'language_id',
-        'title',
-        'description'
-    ];
+//    protected $fillable = [
+//        'quote_id',
+//        'language_id',
+//        'title',
+//        'description'
+//    ];
+    protected $guarded=[];
+
     public function language()
     {
         return $this->belongsTo(Language::class, 'language_id', 'id');

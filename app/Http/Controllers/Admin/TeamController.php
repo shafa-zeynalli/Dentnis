@@ -51,7 +51,6 @@ class TeamController extends Controller
                 'position' => $request->input("$lang.title"),
             ]);
         }
-//        $request->request->replace([]);
         return redirect()->route('admin.teams.index', ['lang' => 'en'])->with('success', 'Team member created successfully');
     }
 
@@ -68,11 +67,9 @@ class TeamController extends Controller
             'firstName' => 'required',
         ]);
 
-        // Eğer güncelleme yapılıyorsa, önce ilgili kaydı bul
-        $team = Team::find($request->input('team_id'));
+         $team = Team::find($request->input('team_id'));
 
-        // Eğer yeni kayıt ise dosyayı kaydet
-        if ($request->hasFile('image')) {
+         if ($request->hasFile('image')) {
             $team->image = $request->file('image')->store('team_images', 'public');
         }
 
@@ -83,8 +80,7 @@ class TeamController extends Controller
             $language = Language::where('lang', $lang)->first();
             $langId = $language->id;
 
-            // Eğer dil çevirisi zaten varsa, güncelle; yoksa oluştur
-            $teamTranslation = TeamTranslation::updateOrCreate(
+             $teamTranslation = TeamTranslation::updateOrCreate(
                 ['teams_id' => $team->id, 'language_id' => $langId],
                 ['position' => $request->input("$lang.title")]
             );
@@ -100,12 +96,10 @@ class TeamController extends Controller
         if ($team) {
             // İlgili çevirileri sil
             $team->translations()->delete();
-//          Takım resmini storage'dan sil
-            if (Storage::disk('public')->exists($team->image)) {
+             if (Storage::disk('public')->exists($team->image)) {
                 Storage::disk('public')->delete($team->image);
             }
-            // Takımı sil
-            $team->delete();
+             $team->delete();
 
             return redirect()->back()->with('success', 'Team deleted successfully.');
         } else {
